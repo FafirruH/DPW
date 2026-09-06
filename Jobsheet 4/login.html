@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SIMPUS | Login Petugas</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>SIMPUS</h1>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">&#9776;</label>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="buku/list.html">Daftar Buku</a></li>
+                <li><a href="buku/tambah.html">Tambah Buku</a></li>
+                <li><a href="anggota/list.html">Daftar Anggota</a></li>
+                <li><a href="anggota/tambah.html">Tambah Anggota</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section style="max-width: 450px; margin: 2rem auto;">
+            <h2>Login Petugas</h2>
+            <form action="dashboard.html" method="POST">
+                <p>
+                    <label for="username">Username</label><br>
+                    <input type="text" id="username" name="username" placeholder="Masukkan username" required>
+                </p>
+                <p>
+                    <label for="password">Password</label><br>
+                    <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+                </p>
+                <p>
+                    <button type="submit">Masuk</button>
+                </p>
+            </form>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                Belum punya akun? <a href="registrasi.html">Daftar di sini</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SIMPUS &mdash; Jobsheet 4</p>
+    </footer>
+</body>
+</html>
