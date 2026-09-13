@@ -22,6 +22,7 @@ async function muatDaftarBuku() {
             tr.innerHTML =
                 "<td>" + buku.judul + "</td>" +
                 "<td>" + buku.pengarang + "</td>" +
+                "<td>" + buku.kategori + "</td>" +
                 "<td>" + buku.tahun + "</td>" +
                 "<td>" + buku.stok + "</td>" +
                 "<td>" +
@@ -39,3 +40,12 @@ async function muatDaftarBuku() {
 }
 
 document.addEventListener("DOMContentLoaded", muatDaftarBuku);
+
+document.addEventListener("DOMContentLoaded", function () {
+    muatDaftarBuku();
+
+    const reloadBtn = document.getElementById("btn-reload");
+    if (reloadBtn) {
+        reloadBtn.addEventListener("click", muatDaftarBuku);
+    }
+});

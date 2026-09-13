@@ -38,3 +38,12 @@ async function muatDaftarAnggota() {
 }
 
 document.addEventListener("DOMContentLoaded", muatDaftarAnggota);
+
+document.addEventListener("DOMContentLoaded", function () {
+    muatDaftarAnggota();
+
+    const reloadBtn = document.getElementById("btn-reload");
+    if (reloadBtn) {
+        reloadBtn.addEventListener("click", muatDaftarAnggota);
+    }
+});
