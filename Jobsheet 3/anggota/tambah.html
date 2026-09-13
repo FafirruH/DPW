@@ -4,53 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SIMPUS | Tambah Anggota</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header>
-        <h1>SIMPUS</h1>
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <label for="nav-toggle" class="nav-toggle-label">&#9776;</label>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Beranda</a></li>
-                <li><a href="../buku/list.html">Daftar Buku</a></li>
-                <li><a href="../buku/tambah.html">Tambah Buku</a></li>
-                <li><a href="list.html">Daftar Anggota</a></li>
-                <li><a href="tambah.html">Tambah Anggota</a></li>
-            </ul>
-        </nav>
+    <header class="navbar navbar-expand-lg navbar-dark" style="background-color:#1d5b8a;">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="../index.html">SIMPUS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../buku/list.html">Daftar Buku</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../buku/tambah.html">Tambah Buku</a></li>
+                    <li class="nav-item"><a class="nav-link" href="list.html">Daftar Anggota</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="tambah.html">Tambah Anggota</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section>
-            <h2>Tambah Anggota</h2>
-            <form>
-                <p>
-                    <label for="nama">Nama</label><br>
-                    <input type="text" id="nama" name="nama" required>
-                </p>
-                <p>
-                    <label for="no_anggota">No. Anggota</label><br>
-                    <input type="text" id="no_anggota" name="no_anggota" required>
-                </p>
-                <p>
-                    <label for="alamat">Alamat</label><br>
-                    <input type="text" id="alamat" name="alamat">
-                </p>
-                <p>
-                    <label for="no_hp">No. HP</label><br>
-                    <input type="text" id="no_hp" name="no_hp">
-                </p>
-                <p>
-                    <button type="submit">Simpan</button>
-                </p>
-            </form>
+    <main class="container my-4">
+        <section class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h2 class="card-title mb-4" style="color:#1d5b8a;">Tambah Anggota</h2>
+                <form action="list.html" method="POST">
+                    <div class="mb-3">
+                        <label for="nama" class="form-label fw-semibold">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="no_anggota" class="form-label fw-semibold">No. Anggota</label>
+                        <input type="text" class="form-control" id="no_anggota" name="no_anggota" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="alamat" class="form-label fw-semibold">Alamat</label>
+                        <input type="text" class="form-control" id="alamat" name="alamat">
+                    </div>
+                    <div class="mb-3">
+                        <label for="no_hp" class="form-label fw-semibold">No. HP</label>
+                        <input type="text" class="form-control" id="no_hp" name="no_hp">
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="btn text-white" style="background-color:#1d5b8a;">Simpan</button>
+                        <a href="list.html" class="btn btn-secondary ms-1">Batal</a>
+                    </div>
+                </form>
+            </div>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2026 SIMPUS &mdash; Jobsheet 3</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
