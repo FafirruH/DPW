@@ -1,0 +1,83 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8fafc;
+    color: #2d3748;
+    margin: 0;
+}
+
+main.container {
+    flex: 1 0 auto;
+}
+
+.bg-theme {
+    background-color: #1d5b8a !important;
+}
+
+.text-theme {
+    color: #1d5b8a !important;
+}
+
+.btn-theme {
+    background-color: #1d5b8a;
+    color: #ffffff;
+}
+
+.btn-theme:hover {
+    background-color: #17496e;
+    color: #ffffff;
+}
+
+.nav-toggle-label {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 991.88px) {
+    .nav-toggle-label {
+        display: block;
+    }
+}
+
+footer {
+    flex-shrink: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+    padding: 1.25rem 0;
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ===== Flash Message ===== */
+.flash {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
