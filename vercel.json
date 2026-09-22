@@ -1,26 +1,13 @@
 {
-  "builds": [
-    {
-      "src": "Jobsheet7/**/*.php",
-      "use": "vercel-php"
-    },
-    {
-      "src": "Jobsheet8/**/*.php",
-      "use": "vercel-php"
-    },
-    {
-      "src": "index.html",
-      "use": "@vercel/static"
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.6.0"
     }
-  ],
+  },
   "routes": [
     {
-      "src": "/Jobsheet7/(.*)",
-      "dest": "/Jobsheet7/$1"
-    },
-    {
-      "src": "/Jobsheet8/(.*)",
-      "dest": "/Jobsheet8/$1"
+      "src": "/(Jobsheet7|Jobsheet8)/(.*)",
+      "dest": "/api/index.php"
     }
   ]
 }
