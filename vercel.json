@@ -2,11 +2,11 @@
   "builds": [
     {
       "src": "Jobsheet7/**/*.php",
-      "use": "@vercel/php"
+      "use": "vercel-php"
     },
     {
       "src": "Jobsheet8/**/*.php",
-      "use": "@vercel/php"
+      "use": "vercel-php"
     },
     {
       "src": "index.html",
