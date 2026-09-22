@@ -1,0 +1,20 @@
+{
+  "functions": {
+    "Jobsheet7/**/*.php": {
+      "runtime": "vercel-php@0.6.0"
+    },
+    "Jobsheet8/**/*.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
+  },
+  "routes": [
+    {
+      "src": "/Jobsheet7/(.*)",
+      "dest": "/Jobsheet7/$1"
+    },
+    {
+      "src": "/Jobsheet8/(.*)",
+      "dest": "/Jobsheet8/$1"
+    }
+  ]
+}
