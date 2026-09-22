@@ -1,17 +1,17 @@
 <?php
-$requestUri = $_SERVER['REQUEST_URI'];
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$parsedUrl = parse_url($requestUri, PHP_URL_PATH);
-
-$filePath = __DIR__ . '/..' . $parsedUrl;
-
-if (is_dir($filePath)) {
-    $filePath = rtrim($filePath, '/') . '/index.php';
+if ($requestUri === '/' || $requestUri === '/index.php') {
+    require __DIR__ . '/../index.php';
+    exit;
 }
 
-if (file_exists($filePath) && pathinfo($filePath, PATHINFO_EXTENSION) === 'php') {
-    require $filePath;
-} else {
-    http_response_code(404);
-    echo "404 Not Found - File PHP tidak ditemukan.";
+$file = __DIR__ . '/..' . $requestUri;
+
+if (file_exists($file) && is_file($file)) {
+    require $file;
+    exit;
 }
+
+http_response_code(404);
+echo "404 Not Found";
