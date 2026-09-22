@@ -6,16 +6,12 @@
   },
   "routes": [
     {
-      "src": "/Jobsheet8/assets/(.*)",
-      "dest": "/Jobsheet8/assets/$1"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "src": "/(assets/.*)",
+      "dest": "/$1"
     },
     {
       "src": "/(.*)",
       "dest": "/api/index.php"
     }
   ]
-}
+}   

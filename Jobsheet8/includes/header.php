@@ -16,7 +16,7 @@ $baseUrl = (strpos($scriptName, '/Jobsheet8') === 0) ? '/Jobsheet8' : '';
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/style.css">
+    <link rel="stylesheet" href="/Jobsheet8/assets/css/style.css">
 </head>
 <body>
     <header class="navbar navbar-expand-lg navbar-dark">

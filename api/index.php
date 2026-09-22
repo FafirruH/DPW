@@ -1,30 +1,22 @@
 <?php
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$targetFile = __DIR__ . '/..' . $requestUri;
 
-if (file_exists($targetFile) && is_file($targetFile)) {
-    $ext = pathinfo($targetFile, PATHINFO_EXTENSION);
-    if ($ext === 'css') {
-        header('Content-Type: text/css; charset=UTF-8');
-        readfile($targetFile);
-        exit;
-    }
-    if ($ext === 'js') {
-        header('Content-Type: application/javascript; charset=UTF-8');
-        readfile($targetFile);
-        exit;
-    }
+if ($requestUri === '/' || $requestUri === '/index.html') {
+    require __DIR__ . '/../index.html';
+    exit;
 }
 
-if (is_dir($targetFile)) {
-    $targetFile = rtrim($targetFile, '/') . '/index.php';
+$file = __DIR__ . '/..' . $requestUri;
+
+if (is_dir($file)) {
+    $file = rtrim($file, '/') . '/index.php';
 }
 
-if (file_exists($targetFile) && is_file($targetFile) && pathinfo($targetFile, PATHINFO_EXTENSION) === 'php') {
+if (file_exists($file) && is_file($file)) {
     header('Content-Type: text/html; charset=UTF-8');
-    require $targetFile;
+    require $file;
     exit;
 }
 
 http_response_code(404);
-echo "404 Not Found";
+echo "404 Not Found - File tidak ditemukan: " . htmlspecialchars($requestUri);
