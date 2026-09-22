@@ -1,21 +1,28 @@
 <?php
-// Tangkap URL yang dibuka pengguna
-$requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-$parsedPath = parse_url($requestUri, PHP_URL_PATH);
+// Mengambil path URL yang diakses browser
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Tentukan path file lokal yang dituju di repositori
-$targetFile = __DIR__ . '/..' . $parsedPath;
-
-// Jika yang dibuka adalah folder (contoh: /Jobsheet7/), cari index.php di dalam folder tersebut
-if (is_dir($targetFile)) {
-    $targetFile = rtrim($targetFile, '/') . '/index.php';
+// Jika mengakses halaman root/landing page
+if ($requestUri === '/' || $requestUri === '/index.html') {
+    require __DIR__ . '/../index.html';
+    exit;
 }
 
-// Eksekusi file PHP jika ditemukan
-if (file_exists($targetFile) && pathinfo($targetFile, PATHINFO_EXTENSION) === 'php') {
+// Menentukan lokasi file fisik di dalam proyek
+$file = __DIR__ . '/..' . $requestUri;
+
+// Jika mengarah ke direktori (misal /Jobsheet8/), cari index.php di dalamnya
+if (is_dir($file)) {
+    $file = rtrim($file, '/') . '/index.php';
+}
+
+// Jika file PHP ditemukan, set header HTML dan jalankan file
+if (file_exists($file) && is_file($file)) {
     header('Content-Type: text/html; charset=UTF-8');
-    require $targetFile;
-} else {
-    http_response_code(404);
-    echo "404 Not Found - File PHP tidak ditemukan untuk: " . htmlspecialchars($parsedPath);
+    require $file;
+    exit;
 }
+
+// Jika tidak ditemukan, kembalikan 404
+http_response_code(404);
+echo "404 Not Found - File tidak ditemukan: " . htmlspecialchars($requestUri);
