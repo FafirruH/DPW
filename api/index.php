@@ -1,21 +1,21 @@
 <?php
-// Tangkap URI permintaan
+// Tangkap URL yang dibuka pengguna
 $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-$parsedUrl = parse_url($requestUri, PHP_URL_PATH);
+$parsedPath = parse_url($requestUri, PHP_URL_PATH);
 
-// Tentukan path file lokal
-$filePath = __DIR__ . '/..' . $parsedUrl;
+// Tentukan path file lokal yang dituju di repositori
+$targetFile = __DIR__ . '/..' . $parsedPath;
 
-// Jika mengarah ke folder, cari index.php di dalamnya
-if (is_dir($filePath)) {
-    $filePath = rtrim($filePath, '/') . '/index.php';
+// Jika yang dibuka adalah folder (contoh: /Jobsheet7/), cari index.php di dalam folder tersebut
+if (is_dir($targetFile)) {
+    $targetFile = rtrim($targetFile, '/') . '/index.php';
 }
 
-// Eksekusi file PHP jika ada
-if (file_exists($filePath) && pathinfo($filePath, PATHINFO_EXTENSION) === 'php') {
+// Eksekusi file PHP jika ditemukan
+if (file_exists($targetFile) && pathinfo($targetFile, PATHINFO_EXTENSION) === 'php') {
     header('Content-Type: text/html; charset=UTF-8');
-    require $filePath;
+    require $targetFile;
 } else {
     http_response_code(404);
-    echo "404 - Halaman tidak ditemukan.";
+    echo "404 Not Found - File PHP tidak ditemukan untuk: " . htmlspecialchars($parsedPath);
 }
