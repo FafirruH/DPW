@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Jobsheet Praktikum Desain Dan Pemrograman WEB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #5c3d2e;
+            --primary-hover: #43281c;
+            --dark-chocolate: #2c1d11;
+            --bg-cream: #f8f4e9;
+            --border-color: #e6ddc4;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: #3d2b1f;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: var(--dark-chocolate) !important;
+        }
+
+        .jobsheet-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+            position: relative;
+        }
+
+        .jobsheet-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(44, 29, 17, 0.12);
+            border-color: var(--primary-color);
+            color: inherit;
+        }
+
+        .jobsheet-badge {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+        }
+
+        .jobsheet-card-disabled {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            cursor: not-allowed;
+            user-select: none;
+        }
+
+        .blur-content {
+            filter: blur(3px);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .locked-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(248, 244, 233, 0.4);
+            z-index: 2;
+        }
+
+        .badge-locked {
+            background-color: #6c757d;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.4rem 0.8rem;
+            border-radius: 50rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar navbar-dark shadow-sm">
+        <div class="container py-1">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
+                <span>Desain Dan Pemrograman WEB</span>
+            </a>
+            <span class="badge bg-light text-dark font-monospace">Modul Jobsheet Praktikum</span>
+        </div>
+    </header>
+
+    <main class="container my-5 flex-grow-1">
+        <div class="text-center mb-4">
+            <h1 class="h2 fw-bold" style="color: var(--dark-chocolate);">Daftar Modul Jobsheet</h1>
+            <p class="text-muted">Pilih modul praktikum di bawah ini untuk melihat progres dan pengerjaan.</p>
+        </div>
+
+        <div class="row g-3 g-md-4">
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <a href="./Jobsheet1/" class="jobsheet-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="jobsheet-badge">Jobsheet 1</span>
+                        <small class="text-muted">/Jobsheet1</small>
+                    </div>
+                    <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">HTML5 Semantic Skeleton</h5>
+                    <p class="text-secondary small mb-3">Struktur elemen semantik dasar untuk modul web SIMPUS.</p>
+                    <div class="d-flex align-items-center text-primary fw-semibold small">
+                        <span>Buka Modul</span> &rarr;
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <a href="./Jobsheet2/" class="jobsheet-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="jobsheet-badge">Jobsheet 2</span>
+                        <small class="text-muted">/Jobsheet2</small>
+                    </div>
+                    <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">CSS3 Styling Dasar</h5>
+                    <p class="text-secondary small mb-3">Penerapan CSS kustom dan layouting tema Warm Chocolate.</p>
+                    <div class="d-flex align-items-center text-primary fw-semibold small">
+                        <span>Buka Modul</span> &rarr;
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <a href="./Jobsheet3/" class="jobsheet-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="jobsheet-badge">Jobsheet 3</span>
+                        <small class="text-muted">/Jobsheet3</small>
+                    </div>
+                    <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">Responsive Design dengan Framework</h5>
+                    <p class="text-secondary small mb-3">Penggunaan Bootstrap grid system untuk fleksibilitas layar.</p>
+                    <div class="d-flex align-items-center text-primary fw-semibold small">
+                        <span>Buka Modul</span> &rarr;
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <a href="./Jobsheet4/" class="jobsheet-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="jobsheet-badge">Jobsheet 4</span>
+                        <small class="text-muted">/Jobsheet4</small>
+                    </div>
+                    <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">UI/UX Design</h5>
+                    <p class="text-secondary small mb-3">Perancangan antarmuka pengguna dan alur aplikasi kasir.</p>
+                    <div class="d-flex align-items-center text-primary fw-semibold small">
+                        <span>Buka Modul</span> &rarr;
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <a href="./Jobsheet5/" class="jobsheet-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="jobsheet-badge">Jobsheet 5</span>
+                        <small class="text-muted">/Jobsheet5</small>
+                    </div>
+                    <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">JavaScript DOM & Event</h5>
+                    <p class="text-secondary small mb-3">Manipulasi elemen DOM interaktif dan penanganan event handler.</p>
+                    <div class="d-flex align-items-center text-primary fw-semibold small">
+                        <span>Buka Modul</span> &rarr;
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <a href="./Jobsheet6/" class="jobsheet-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="jobsheet-badge">Jobsheet 6</span>
+                        <small class="text-muted">/Jobsheet6</small>
+                    </div>
+                    <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">Fetch API & JSON</h5>
+                    <p class="text-secondary small mb-3">Pengambilan data asinkronus menggunakan Fetch API.</p>
+                    <div class="d-flex align-items-center text-primary fw-semibold small">
+                        <span>Buka Modul</span> &rarr;
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <a href="./Jobsheet7/" class="jobsheet-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="jobsheet-badge">Jobsheet 7</span>
+                        <small class="text-muted">/Jobsheet7</small>
+                    </div>
+                    <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">PHP Dasar & Form Handling</h5>
+                    <p class="text-secondary small mb-3">Pemrosesan form POST/GET dan logika pemrograman PHP.</p>
+                    <div class="d-flex align-items-center text-primary fw-semibold small">
+                        <span>Buka Modul</span> &rarr;
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <a href="./Jobsheet8/" class="jobsheet-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="jobsheet-badge">Jobsheet 8</span>
+                        <small class="text-muted">/Jobsheet8</small>
+                    </div>
+                    <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">Koneksi PostgreSQL</h5>
+                    <p class="text-secondary small mb-3">Integrasi database PostgreSQL menggunakan PDO.</p>
+                    <div class="d-flex align-items-center text-primary fw-semibold small">
+                        <span>Buka Modul</span> &rarr;
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="jobsheet-card-disabled p-4">
+                    <div class="locked-overlay">
+                        <span class="badge-locked">Segera</span>
+                        <small class="text-muted mt-1 fw-semibold">Tidak dapat diakses</small>
+                    </div>
+                    <div class="blur-content">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="jobsheet-badge">Jobsheet 9</span>
+                            <small class="text-muted">/Jobsheet9</small>
+                        </div>
+                        <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">CRUD Penuh</h5>
+                        <p class="text-secondary small mb-3">Pengelolaan data lengkap (Create, Read, Update, Delete).</p>
+                        <div class="d-flex align-items-center text-secondary small">
+                            <span>Buka Modul</span> &rarr;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="jobsheet-card-disabled p-4">
+                    <div class="locked-overlay">
+                        <span class="badge-locked">Segera</span>
+                        <small class="text-muted mt-1 fw-semibold">Tidak dapat diakses</small>
+                    </div>
+                    <div class="blur-content">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="jobsheet-badge">Jobsheet 10</span>
+                            <small class="text-muted">/Jobsheet10</small>
+                        </div>
+                        <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">Autentikasi & Manajemen Sesi</h5>
+                        <p class="text-secondary small mb-3">Sistem login, registrasi pengguna, dan PHP Session.</p>
+                        <div class="d-flex align-items-center text-secondary small">
+                            <span>Buka Modul</span> &rarr;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="jobsheet-card-disabled p-4">
+                    <div class="locked-overlay">
+                        <span class="badge-locked">Segera</span>
+                        <small class="text-muted mt-1 fw-semibold">Tidak dapat diakses</small>
+                    </div>
+                    <div class="blur-content">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="jobsheet-badge">Jobsheet 11</span>
+                            <small class="text-muted">/Jobsheet11</small>
+                        </div>
+                        <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">Keamanan Web Dasar</h5>
+                        <p class="text-secondary small mb-3">Proteksi dari kerentanan SQL Injection & XSS Attack.</p>
+                        <div class="d-flex align-items-center text-secondary small">
+                            <span>Buka Modul</span> &rarr;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="jobsheet-card-disabled p-4">
+                    <div class="locked-overlay">
+                        <span class="badge-locked">Segera</span>
+                        <small class="text-muted mt-1 fw-semibold">Tidak dapat diakses</small>
+                    </div>
+                    <div class="blur-content">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="jobsheet-badge">Jobsheet 12</span>
+                            <small class="text-muted">/Jobsheet12</small>
+                        </div>
+                        <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">Integrasi Modul Peminjaman</h5>
+                        <p class="text-secondary small mb-3">Implementasi transaksi peminjaman dan pengembalian.</p>
+                        <div class="d-flex align-items-center text-secondary small">
+                            <span>Buka Modul</span> &rarr;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="jobsheet-card-disabled p-4">
+                    <div class="locked-overlay">
+                        <span class="badge-locked">Segera</span>
+                        <small class="text-muted mt-1 fw-semibold">Tidak dapat diakses</small>
+                    </div>
+                    <div class="blur-content">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="jobsheet-badge">Jobsheet 13</span>
+                            <small class="text-muted">/Jobsheet13</small>
+                        </div>
+                        <h5 class="fw-bold mb-2" style="color: var(--dark-chocolate);">Deployment & Dokumentasi (SIMPUS-Mini)</h5>
+                        <p class="text-secondary small mb-3">Panduan rilis serverless Vercel & penyusunan dokumentasi.</p>
+                        <div class="d-flex align-items-center text-secondary small">
+                            <span>Buka Modul</span> &rarr;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="text-center py-3 border-top bg-white mt-auto">
+        <div class="container">
+            <p class="mb-0 text-secondary small">&copy; 2026 Desain Pemrograman WEB — Fafirru Hadzami Syach Mashuri</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
