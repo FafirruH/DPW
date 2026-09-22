@@ -6,8 +6,13 @@ $user     = getenv('PGUSER') ?: 'postgres';
 $password = getenv('PGPASSWORD') ?: 'postgres';
 
 try {
-    $sslmode = getenv('PGHOST') ? ';sslmode=require' : '';
-    $dsn     = "pgsql:host={$host};port={$port};dbname={$dbname}{$sslmode}";
+    if (getenv('PGHOST')) {
+        $endpoint = explode('.', $host)[0];
+        
+        $dsn = "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=require;options='endpoint={$endpoint}'";
+    } else {
+        $dsn = "pgsql:host={$host};port={$port};dbname={$dbname}";
+    }
 
     $pdo = new PDO($dsn, $user, $password, [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
