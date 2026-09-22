@@ -2,25 +2,32 @@
 session_start();
 require __DIR__ . '/../includes/koneksi.php';
 
-$judul = trim($_POST['judul'] ?? '');
+$judul     = trim($_POST['judul'] ?? '');
 $pengarang = trim($_POST['pengarang'] ?? '');
-$tahun = $_POST['tahun'] ?? '';
-$isbn = trim($_POST['isbn'] ?? '');
-$stok = $_POST['stok'] ?? '';
-$kategori = trim($_POST['kategori'] ?? '');
+$tglMasuk  = $_POST['tgl_masuk'] ?? '';
+$isbn      = trim($_POST['isbn'] ?? '');
+$harga     = $_POST['harga'] ?? 0;
+$stok      = $_POST['stok'] ?? 0;
+$kategori  = trim($_POST['kategori'] ?? '');
 
 $errors = [];
 if ($judul === '') {
-    $errors[] = "Judul wajib diisi.";
+    $errors[] = "Nama barang wajib diisi.";
 }
 if ($pengarang === '') {
-    $errors[] = "Pengarang wajib diisi.";
+    $errors[] = "Produsen / Merek wajib diisi.";
 }
-if (!is_numeric($tahun) || $tahun < 1900 || $tahun > 2026) {
-    $errors[] = "Tahun harus di antara 1900-2026.";
+if ($tglMasuk === '') {
+    $errors[] = "Tanggal barang masuk wajib diisi.";
+}
+if (!is_numeric($harga) || $harga < 0) {
+    $errors[] = "Harga barang tidak boleh negatif.";
 }
 if (!is_numeric($stok) || $stok < 0) {
     $errors[] = "Stok tidak boleh negatif.";
+}
+if ($kategori === '') {
+    $errors[] = "Kategori barang wajib dipilih.";
 }
 
 if (!empty($errors)) {
@@ -29,20 +36,44 @@ if (!empty($errors)) {
     exit;
 }
 
-$stmt = $pdo->prepare(
-    "INSERT INTO buku (judul, pengarang, tahun, isbn, stok, kategori)
-     VALUES (:judul, :pengarang, :tahun, :isbn, :stok, :kategori)
+try {
+    $pdo->beginTransaction();
+
+    $stmt = $pdo->prepare(
+    "INSERT INTO barang (judul, pengarang, tahun, isbn, harga, stok, kategori)
+     VALUES (:judul, :pengarang, :tahun, :isbn, :harga, :stok, :kategori)
      RETURNING id"
 );
-$stmt->execute([
-    'judul' => $judul,
-    'pengarang' => $pengarang,
-    'tahun' => (int) $tahun,
-    'isbn' => $isbn,
-    'stok' => (int) $stok,
-    'kategori' => $kategori,
-]);
+    $stmt->execute([
+        'judul'     => $judul,
+        'pengarang' => $pengarang,
+        'tahun'     => $tglMasuk,
+        'isbn'      => $isbn,
+        'harga'     => (float) $harga,
+        'stok'      => (int) $stok,
+        'kategori'  => $kategori,
+    ]);
 
-$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil ditambahkan.'];
+    $totalPengeluaran = (float) $harga * (int) $stok;
+    if ($totalPengeluaran > 0) {
+        $stmtTrx = $pdo->prepare(
+            "INSERT INTO transaksi (jenis, nominal, keterangan, tanggal)
+             VALUES ('keluar', :nominal, :keterangan, :tanggal)"
+        );
+        $stmtTrx->execute([
+            'nominal'    => $totalPengeluaran,
+            'keterangan' => "Pembelian/Stok Masuk: " . $judul . " (" . $stok . " pcs)",
+            'tanggal'    => $tglMasuk
+        ]);
+    }
+
+    $pdo->commit();
+    $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Barang masuk berhasil disimpan & pengeluaran telah dicatat.'];
+
+} catch (Exception $e) {
+    $pdo->rollBack();
+    $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Gagal menyimpan data: ' . $e->getMessage()];
+}
+
 header('Location: list.php');
 exit;

@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #5c3d2e;       /* Cokelat Mocha/Warm Chocolate */
+    --primary-hover: #43281c;       /* Cokelat Tua Dark Espresso */
+    --dark-chocolate: #2c1d11;      /* Warna Teks & Header Utama */
+    --bg-cream: #f8f4e9;            /* Background Krem Warm */
+    --bg-card: #ffffff;             /* Card Putih Bersih */
+    --accent-terracotta: #b85042;   /* Aksen Tombol/Sorotan */
+    --text-main: #3d2b1f;           /* Teks Utama Cokelat Peat */
+    --text-muted: #786452;          /* Teks Sekunder Cokelat Soft */
+    --border-color: #e6ddc4;        /* Border Krem Soft */
+    --card-shadow: 0 8px 20px -4px rgba(92, 61, 46, 0.06);
+    --border-radius: 14px;
+}
+
 html, body {
     height: 100%;
 }
@@ -6,78 +22,145 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f8fafc;
-    color: #2d3748;
+    background-color: var(--bg-cream);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     margin: 0;
+    line-height: 1.6;
 }
 
 main.container {
     flex: 1 0 auto;
 }
 
-.bg-theme {
-    background-color: #1d5b8a !important;
+/* Header Navbar Warm Chocolate */
+.navbar {
+    background-color: var(--dark-chocolate) !important;
+    box-shadow: 0 4px 12px rgba(44, 29, 17, 0.15);
+    padding: 0.85rem 0;
 }
 
-.text-theme {
-    color: #1d5b8a !important;
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    color: #f8f4e9 !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #d0c0b0 !important;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #ffffff !important;
+    background-color: rgba(248, 244, 233, 0.12);
+}
+
+/* Card Styling */
+.card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    background-color: var(--bg-card);
+}
+
+.card-title {
+    color: var(--dark-chocolate);
+}
+
+/* Card Statistik Kas Warm */
+.stat-card {
+    border-radius: var(--border-radius);
+    padding: 1.35rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease;
+}
+
+/* Form Custom */
+.form-label {
+    color: var(--text-main);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background-color: #fdfbf7;
+    color: var(--text-main);
+    padding: 0.65rem 0.9rem;
+    font-size: 0.95rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    background-color: #ffffff;
+    color: var(--dark-chocolate);
+    box-shadow: 0 0 0 3px rgba(92, 61, 46, 0.15);
+}
+
+/* Table UI Warm Clean */
+.table-responsive {
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background-color: #ffffff;
+}
+
+.table thead th {
+    background-color: #f4eee0;
+    color: var(--dark-chocolate);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table tbody td {
+    padding: 0.95rem 1rem;
+    vertical-align: middle;
+    font-size: 0.925rem;
+    color: var(--text-main);
+    border-bottom: 1px solid #f2ebe0;
+}
+
+/* Custom Buttons Warm */
+.btn {
+    border-radius: 10px;
+    padding: 0.55rem 1.1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
 }
 
 .btn-theme {
-    background-color: #1d5b8a;
+    background-color: var(--primary-color);
     color: #ffffff;
+    border: none;
 }
 
 .btn-theme:hover {
-    background-color: #17496e;
+    background-color: var(--primary-hover);
     color: #ffffff;
 }
 
-.nav-toggle-label {
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: none;
-}
-
-@media (max-width: 991.88px) {
-    .nav-toggle-label {
-        display: block;
-    }
-}
-
+/* Footer */
 footer {
-    flex-shrink: 0;
-    width: 100%;
     background-color: #ffffff;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid var(--border-color);
     text-align: center;
-    padding: 1.25rem 0;
-    color: #64748b;
+    padding: 1.2rem 0;
+    color: var(--text-muted);
     font-size: 0.875rem;
     margin-top: auto;
-}
-
-footer p {
-    margin: 0;
-}
-
-/* ===== Flash Message ===== */
-.flash {
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    margin-bottom: 1rem;
-    font-weight: 500;
-}
-
-.flash-success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.flash-error {
-    background-color: #f8d7da;
-    color: #721c24;
 }

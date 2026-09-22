@@ -22,9 +22,8 @@ if (!empty($errors)) {
 }
 
 $stmt = $pdo->prepare(
-    "INSERT INTO anggota (nama, no_anggota, alamat, no_hp)
-     VALUES (:nama, :no_anggota, :alamat, :no_hp)
-     RETURNING id"
+    "INSERT INTO pelanggan (nama, no_anggota, alamat, no_hp)
+     VALUES (:nama, :no_anggota, :alamat, :no_hp)"
 );
 $stmt->execute([
     'nama' => $nama,

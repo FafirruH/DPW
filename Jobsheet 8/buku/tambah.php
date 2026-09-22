@@ -1,5 +1,5 @@
 <?php 
-$page_title = "Tambah Buku";
+$page_title = "Tambah Barang";
 include __DIR__ . '/../includes/header.php'; 
 
 $flash = $_SESSION['flash'] ?? null;
@@ -8,40 +8,55 @@ unset($_SESSION['flash']);
 
     <main class="container my-4">
         <section class="card shadow-sm mb-4">
-            <div class="card-body">
-                <h2 class="card-title mb-4 fw-bold" style="color:#1d5b8a;">Tambah Buku</h2>
-                <form id="form-tambah" action="/DPW/buku/proses_tambah.php" method="POST">
+            <div class="card-body p-4">
+                <h2 class="card-title h3 mb-4 fw-bold" style="color:#2c1d11;">Tambah Barang</h2>
+                
+                <?php if ($flash): ?>
+                    <div class="alert alert-<?= $flash['type'] === 'error' ? 'danger' : 'success' ?> mb-3">
+                        <?= htmlspecialchars($flash['pesan']) ?>
+                    </div>
+                <?php endif; ?>
+
+                <form id="form-tambah" action="proses_tambah.php" method="POST">
                     <div class="mb-3">
-                        <label for="judul" class="form-label fw-semibold">Judul Buku</label>
-                        <input type="text" class="form-control" id="judul" name="judul" required>
+                        <label for="judul" class="form-label fw-semibold">Nama Barang</label>
+                        <input type="text" class="form-control" id="judul" name="judul" placeholder="Contoh: Minyak Goreng Bimoli 1L" required>
                     </div>
                     <div class="mb-3">
-                        <label for="pengarang" class="form-label fw-semibold">Pengarang</label>
-                        <input type="text" class="form-control" id="pengarang" name="pengarang" required>
+                        <label for="pengarang" class="form-label fw-semibold">Produsen / Merek</label>
+                        <input type="text" class="form-control" id="pengarang" name="pengarang" placeholder="Contoh: PT Indofood" required>
                     </div>
                     <div class="mb-3">
-                        <label for="tahun" class="form-label fw-semibold">Tahun Terbit</label>
-                        <input type="number" class="form-control" id="tahun" name="tahun" min="1900" max="2026" required>
+                        <label for="tgl_masuk" class="form-label fw-semibold">Tanggal Barang Masuk</label>
+                        <input type="date" class="form-control" id="tgl_masuk" name="tgl_masuk" required>
                     </div>
                     <div class="mb-3">
-                        <label for="isbn" class="form-label fw-semibold">ISBN</label>
-                        <input type="text" class="form-control" id="isbn" name="isbn">
+                        <label for="isbn" class="form-label fw-semibold">Kode Barang / Barcode</label>
+                        <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Contoh: 899123456789">
+                    </div>
+                    <div class="mb-3">
+                        <label for="harga" class="form-label fw-semibold">Harga Barang (Rp)</label>
+                        <input type="number" class="form-control" id="harga" name="harga" min="0" step="500" placeholder="Contoh: 18000" required>
                     </div>
                     <div class="mb-3">
                         <label for="stok" class="form-label fw-semibold">Stok</label>
-                        <input type="number" class="form-control" id="stok" name="stok" min="0" required>
+                        <input type="number" class="form-control" id="stok" name="stok" min="0" placeholder="Contoh: 24" required>
                     </div>
                     <div class="mb-3">
-                        <label for="kategori" class="form-label fw-semibold">Kategori</label>
-                        <select class="form-select" id="kategori" name="kategori">
-                            <option value="fiksi">Fiksi</option>
-                            <option value="non-fiksi">Non-Fiksi</option>
-                            <option value="referensi">Referensi</option>
+                        <label for="kategori" class="form-label fw-semibold">Kategori Barang</label>
+                        <select class="form-select" id="kategori" name="kategori" required>
+                            <option value="" disabled selected>-- Pilih Kategori --</option>
+                            <option value="Sembako">Sembako (Beras, Minyak, Gula, dll)</option>
+                            <option value="Makanan & Minuman">Makanan & Minuman Ringan</option>
+                            <option value="Bumbu & Dapur">Bumbu & Bahan Dapur</option>
+                            <option value="Sabun & Kebersihan">Perlengkapan Mandi & Cuci</option>
+                            <option value="Obat & Kesehatan">Obat & Kesehatan</option>
+                            <option value="Lainnya">Lainnya</option>
                         </select>
                     </div>
                     <div class="pt-2">
-                        <button type="submit" class="btn text-white" style="background-color:#1d5b8a;">Simpan</button>
-                        <a href="/DPW/buku/list.php" class="btn btn-secondary ms-1">Batal</a>
+                        <button type="submit" class="btn btn-theme">Simpan</button>
+                        <a href="list.php" class="btn btn-secondary ms-1">Batal</a>
                     </div>
                 </form>
             </div>
