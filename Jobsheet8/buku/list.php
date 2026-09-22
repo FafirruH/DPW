@@ -20,7 +20,7 @@ $daftarBarang = $pdo->query("SELECT * FROM barang ORDER BY id DESC")->fetchAll(P
               <button type="button" id="btn-reload" class="btn btn-outline-secondary btn-sm" onclick="location.reload();">
                 Muat Ulang
               </button>
-              <a href="tambah.php" class="btn btn-theme btn-sm">
+              <a href="/Jobsheet8/buku/tambah.php" class="btn btn-theme btn-sm">
                 + Tambah Barang
               </a>
             </div>
@@ -80,7 +80,7 @@ $daftarBarang = $pdo->query("SELECT * FROM barang ORDER BY id DESC")->fetchAll(P
             <?php endif; ?>
           </td>
           <td class="text-center">
-            <a href="hapus.php?id=<?= $buku['id'] ?>" 
+            <a href="/Jobsheet8/buku/hapus.php?id=<?= $buku['id'] ?>" 
                class="btn btn-sm btn-outline-danger" 
                onclick="return confirm('Apakah Anda yakin ingin menghapus barang <?= htmlspecialchars(addslashes($buku['judul'])) ?>?');">
                Hapus

@@ -2,13 +2,13 @@
 session_start();
 require __DIR__ . '/../includes/koneksi.php';
 
-$idAnggota   = $_POST['id_anggota'] ?? null;
-$idBarang    = $_POST['id_barang'] ?? null;
-$jumlahBeli  = $_POST['jumlah'] ?? 0;
+$idAnggota  = $_POST['id_anggota'] ?? null;
+$idBarang   = $_POST['id_barang'] ?? null;
+$jumlahBeli = $_POST['jumlah'] ?? 0;
 
 if (!$idAnggota || !$idBarang || !is_numeric($jumlahBeli) || $jumlahBeli <= 0) {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Mohon pilih barang dan masukan jumlah pembelian yang valid.'];
-    header('Location: list.php');
+    header('Location: /Jobsheet8/anggota/list.php');
     exit;
 }
 
@@ -60,5 +60,5 @@ try {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Gagal memproses transaksi: ' . $e->getMessage()];
 }
 
-header('Location: list.php');
+header('Location: /Jobsheet8/anggota/list.php');
 exit;

@@ -6,7 +6,7 @@ $id = $_GET['id'] ?? null;
 
 if (!$id || !is_numeric($id)) {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'ID pelanggan tidak valid.'];
-    header('Location: list.php');
+    header('Location: /Jobsheet8/anggota/list.php');
     exit;
 }
 
@@ -32,5 +32,5 @@ try {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Gagal menghapus pelanggan: ' . $e->getMessage()];
 }
 
-header('Location: list.php');
+header('Location: /Jobsheet8/anggota/list.php');
 exit;
