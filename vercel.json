@@ -4,17 +4,6 @@
       "runtime": "vercel-php@0.9.0"
     }
   },
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=0; includeSubDomains"
-        }
-      ]
-    }
-  ],
   "routes": [
     {
       "src": "/(assets/.*)",
@@ -25,4 +14,4 @@
       "dest": "/api/index.php"
     }
   ]
-}
+}   
