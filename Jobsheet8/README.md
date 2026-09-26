@@ -36,9 +36,9 @@ Jobsheet8/
 │   ├── css/
 │   │   └── style.css           # Custom UI / Tema Warm Chocolate
 │   └── js/
-│       ├── anggota.js          # Event listener muat ulang pelanggan
 │       ├── app.js              # Validasi form, filter tabel, toggle navbar
-│       └── buku.js             # Event listener muat ulang barang
+│       ├── barang.js           # Event listener muat ulang barang
+│       └── pelanggan.js        # Event listener muat ulang pelanggan
 ├── barang/
 │   ├── hapus.php               # Hapus barang & riwayat transaksinya
 │   ├── list.php                # Tabel inventaris barang
