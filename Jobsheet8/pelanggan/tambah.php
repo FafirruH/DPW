@@ -17,14 +17,14 @@ unset($_SESSION['flash']);
                 </div>
             <?php endif; ?>
 
-            <form id="form-tambah" action="/Jobsheet8/anggota/proses_tambah.php" method="POST">
+            <form id="form-tambah" action="/Jobsheet8/pelanggan/proses_tambah.php" method="POST">
                 <div class="mb-3">
                     <label for="nama" class="form-label fw-semibold">Nama Pelanggan</label>
                     <input type="text" class="form-control" id="nama" name="nama" required>
                 </div>
                 <div class="mb-3">
-                    <label for="no_anggota" class="form-label fw-semibold">No. Pelanggan</label>
-                    <input type="text" class="form-control" id="no_anggota" name="no_anggota" required>
+                    <label for="no_pelanggan" class="form-label fw-semibold">No. Pelanggan</label>
+                    <input type="text" class="form-control" id="no_pelanggan" name="no_pelanggan" required>
                 </div>
                 <div class="mb-3">
                     <label for="alamat" class="form-label fw-semibold">Alamat</label>
@@ -36,7 +36,7 @@ unset($_SESSION['flash']);
                 </div>
                 <div class="pt-2">
                     <button type="submit" class="btn btn-theme">Simpan</button>
-                    <a href="/Jobsheet8/anggota/list.php" class="btn btn-secondary ms-1">Batal</a>
+                    <a href="/Jobsheet8/pelanggan/list.php" class="btn btn-secondary ms-1">Batal</a>
                 </div>
             </form>
         </div>

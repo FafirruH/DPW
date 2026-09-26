@@ -7,7 +7,7 @@ $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
 $daftarPelanggan = $pdo->query("SELECT * FROM pelanggan ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
-$daftarBarang    = $pdo->query("SELECT * FROM barang WHERE stok > 0 ORDER BY judul ASC")->fetchAll(PDO::FETCH_ASSOC);
+$daftarBarang    = $pdo->query("SELECT * FROM barang WHERE stok > 0 ORDER BY nama ASC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <main class="container my-4">
@@ -21,7 +21,7 @@ $daftarBarang    = $pdo->query("SELECT * FROM barang WHERE stok > 0 ORDER BY jud
           <button type="button" id="btn-reload" class="btn btn-outline-secondary btn-sm" onclick="location.reload();">
             Muat Ulang
           </button>
-          <a href="/Jobsheet8/anggota/tambah.php" class="btn btn-theme btn-sm">
+          <a href="/Jobsheet8/pelanggan/tambah.php" class="btn btn-theme btn-sm">
             + Tambah Pelanggan
           </a>
         </div>
@@ -56,50 +56,50 @@ $daftarBarang    = $pdo->query("SELECT * FROM barang WHERE stok > 0 ORDER BY jud
     <td colspan="5" class="text-center text-muted py-4">Belum ada data pelanggan. Silakan tambah pelanggan baru.</td>
   </tr>
 <?php else: ?>
-  <?php foreach ($daftarPelanggan as $anggota): ?>
+  <?php foreach ($daftarPelanggan as $pelanggan): ?>
     <tr>
-      <td><?= htmlspecialchars($anggota['no_anggota']) ?></td>
-      <td class="fw-semibold"><?= htmlspecialchars($anggota['nama']) ?></td>
-      <td><?= htmlspecialchars($anggota['alamat'] ?? '-') ?></td>
-      <td><?= htmlspecialchars($anggota['no_hp'] ?? '-') ?></td>
+      <td><?= htmlspecialchars($pelanggan['no_pelanggan']) ?></td>
+      <td class="fw-semibold"><?= htmlspecialchars($pelanggan['nama']) ?></td>
+      <td><?= htmlspecialchars($pelanggan['alamat'] ?? '-') ?></td>
+      <td><?= htmlspecialchars($pelanggan['no_hp'] ?? '-') ?></td>
       <td class="text-center">
-        <button type="button" class="btn btn-sm btn-success me-1" data-bs-toggle="modal" data-bs-target="#modalBeli<?= $anggota['id'] ?>">
+        <button type="button" class="btn btn-sm btn-success me-1" data-bs-toggle="modal" data-bs-target="#modalBeli<?= $pelanggan['id'] ?>">
           + Beli Barang
         </button>
-        <a href="/Jobsheet8/anggota/hapus.php?id=<?= $anggota['id'] ?>" 
+        <a href="/Jobsheet8/pelanggan/hapus.php?id=<?= $pelanggan['id'] ?>" 
            class="btn btn-sm btn-outline-danger" 
-           onclick="return confirm('Apakah Anda yakin ingin menghapus pelanggan <?= htmlspecialchars(addslashes($anggota['nama'])) ?>?');">
+           onclick="return confirm('Apakah Anda yakin ingin menghapus pelanggan <?= htmlspecialchars(addslashes($pelanggan['nama'])) ?>?');">
            Hapus
         </a>
         
-        <div class="modal fade text-start" id="modalBeli<?= $anggota['id'] ?>" tabindex="-1" aria-hidden="true">
+        <div class="modal fade text-start" id="modalBeli<?= $pelanggan['id'] ?>" tabindex="-1" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
-              <form action="/Jobsheet8/anggota/proses_beli.php" method="POST">
+              <form action="/Jobsheet8/pelanggan/proses_beli.php" method="POST">
                 <div class="modal-header">
                   <h5 class="modal-title fw-bold" style="color:#2c1d11;">Pilih Barang untuk Dibeli</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                  <input type="hidden" name="id_anggota" value="<?= $anggota['id'] ?>">
+                  <input type="hidden" name="id_pelanggan" value="<?= $pelanggan['id'] ?>">
                   
                   <div class="mb-3">
                     <label class="form-label fw-semibold">Nama Pelanggan</label>
-                    <input type="text" class="form-control" value="<?= htmlspecialchars($anggota['nama']) ?>" readonly>
+                    <input type="text" class="form-control" value="<?= htmlspecialchars($pelanggan['nama']) ?>" readonly>
                   </div>
 
                   <div class="mb-3">
-                    <label for="id_barang_<?= $anggota['id'] ?>" class="form-label fw-semibold">Pilih Barang yang Tersedia</label>
+                    <label for="id_barang_<?= $pelanggan['id'] ?>" class="form-label fw-semibold">Pilih Barang yang Tersedia</label>
                     <?php if (empty($daftarBarang)): ?>
                       <div class="alert alert-warning mb-0 p-2 fs-6">
                         Stok semua barang sedang kosong/belum ada barang.
                       </div>
                     <?php else: ?>
-                      <select class="form-select" name="id_barang" id="id_barang_<?= $anggota['id'] ?>" required>
-                        <option value="" disabled selected>-- Pilih Barang --</option>
+                      <select class="form-select" name="id_barang" id="id_barang_<?= $pelanggan['id'] ?>" required>
+                        <option value="" disabled selected>Pilih Barang</option>
                         <?php foreach ($daftarBarang as $b): ?>
                           <option value="<?= $b['id'] ?>">
-                            <?= htmlspecialchars($b['judul']) ?> — Rp <?= number_format($b['harga'], 0, ',', '.') ?> (Sisa Stok: <?= $b['stok'] ?>)
+                            <?= htmlspecialchars($b['nama']) ?> — Rp <?= number_format($b['harga'], 0, ',', '.') ?> (Sisa Stok: <?= $b['stok'] ?>)
                           </option>
                         <?php endforeach; ?>
                       </select>
@@ -107,8 +107,8 @@ $daftarBarang    = $pdo->query("SELECT * FROM barang WHERE stok > 0 ORDER BY jud
                   </div>
 
                   <div class="mb-3">
-                    <label for="jumlah_<?= $anggota['id'] ?>" class="form-label fw-semibold">Jumlah Pembelian (pcs)</label>
-                    <input type="number" class="form-control" name="jumlah" id="jumlah_<?= $anggota['id'] ?>" min="1" value="1" required <?= empty($daftarBarang) ? 'disabled' : '' ?>>
+                    <label for="jumlah_<?= $pelanggan['id'] ?>" class="form-label fw-semibold">Jumlah Pembelian (pcs)</label>
+                    <input type="number" class="form-control" name="jumlah" id="jumlah_<?= $pelanggan['id'] ?>" min="1" value="1" required <?= empty($daftarBarang) ? 'disabled' : '' ?>>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -131,6 +131,6 @@ $daftarBarang    = $pdo->query("SELECT * FROM barang WHERE stok > 0 ORDER BY jud
   </section>
 </main>
 
-<script src="/assets/js/anggota.js"></script>
+<script src="/assets/js/pelanggan.js"></script>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>

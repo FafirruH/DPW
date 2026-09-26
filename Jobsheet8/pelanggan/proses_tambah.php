@@ -3,7 +3,7 @@ session_start();
 require __DIR__ . '/../includes/koneksi.php';
 
 $nama      = trim($_POST['nama'] ?? '');
-$noAnggota = trim($_POST['no_anggota'] ?? '');
+$noPelanggan = trim($_POST['no_pelanggan'] ?? '');
 $alamat    = trim($_POST['alamat'] ?? '');
 $noHp      = trim($_POST['no_hp'] ?? '');
 
@@ -11,24 +11,24 @@ $errors = [];
 if ($nama === '') {
     $errors[] = "Nama wajib diisi.";
 }
-if ($noAnggota === '') {
+if ($noPelanggan === '') {
     $errors[] = "No. Pelanggan wajib diisi.";
 }
 
 if (!empty($errors)) {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => implode(' ', $errors)];
-    header('Location: /Jobsheet8/anggota/tambah.php');
+    header('Location: /Jobsheet8/pelanggan/tambah.php');
     exit;
 }
 
 try {
     $stmt = $pdo->prepare(
-        "INSERT INTO pelanggan (nama, no_anggota, alamat, no_hp)
-         VALUES (:nama, :no_anggota, :alamat, :no_hp)"
+        "INSERT INTO pelanggan (nama, no_pelanggan, alamat, no_hp)
+         VALUES (:nama, :no_pelanggan, :alamat, :no_hp)"
     );
     $stmt->execute([
         'nama'       => $nama,
-        'no_anggota' => $noAnggota,
+        'no_pelanggan' => $noPelanggan,
         'alamat'     => $alamat,
         'no_hp'      => $noHp,
     ]);
@@ -38,5 +38,5 @@ try {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Gagal menambahkan pelanggan: ' . $e->getMessage()];
 }
 
-header('Location: /Jobsheet8/anggota/list.php');
+header('Location: /Jobsheet8/pelanggan/list.php');
 exit;

@@ -13,13 +13,13 @@ if (!$id || !is_numeric($id)) {
 try {
     $pdo->beginTransaction();
 
-$stmtB = $pdo->prepare("SELECT judul FROM barang WHERE id = :id");
+$stmtB = $pdo->prepare("SELECT nama FROM barang WHERE id = :id");
 $stmtB->execute(['id' => (int) $id]);
 $barang = $stmtB->fetch(PDO::FETCH_ASSOC);
 
 if ($barang) {
     $stmtDelTrx = $pdo->prepare("DELETE FROM transaksi WHERE keterangan LIKE :ket");
-    $stmtDelTrx->execute(['ket' => '%' . $barang['judul'] . '%']);
+    $stmtDelTrx->execute(['ket' => '%' . $barang['nama'] . '%']);
 
     $stmtDelBarang = $pdo->prepare("DELETE FROM barang WHERE id = :id");
     $stmtDelBarang->execute(['id' => (int) $id]);

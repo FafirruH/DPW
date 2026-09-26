@@ -188,10 +188,10 @@ session_start();
                         <a class="nav-link" href="/Jobsheet8/index.php">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Jobsheet8/buku/list.php">Barang</a>
+                        <a class="nav-link" href="/Jobsheet8/barang/list.php">Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Jobsheet8/anggota/list.php">Pelanggan</a>
+                        <a class="nav-link" href="/Jobsheet8/pelanggan/list.php">Pelanggan</a>
                     </li>
                 </ul>
             </nav>

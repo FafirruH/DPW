@@ -14,7 +14,7 @@ if (!$idBarang || !is_numeric($jumlahKeluar) || $jumlahKeluar <= 0) {
 try {
     $pdo->beginTransaction();
 
-    $stmt = $pdo->prepare("SELECT * FROM buku WHERE id = :id");
+    $stmt = $pdo->prepare("SELECT * FROM barang WHERE id = :id");
     $stmt->execute(['id' => $idBarang]);
     $barang = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -27,7 +27,7 @@ try {
     }
 
     $stokBaru = $barang['stok'] - $jumlahKeluar;
-    $stmtUpdate = $pdo->prepare("UPDATE buku SET stok = :stok WHERE id = :id");
+    $stmtUpdate = $pdo->prepare("UPDATE barang SET stok = :stok WHERE id = :id");
     $stmtUpdate->execute(['stok' => $stokBaru, 'id' => $idBarang]);
 
     $totalPenghasilan = (float) $barang['harga'] * (int) $jumlahKeluar;
@@ -37,7 +37,7 @@ try {
     );
     $stmtTrx->execute([
         'nominal'    => $totalPenghasilan,
-        'keterangan' => "Penjualan/Barang Keluar: " . $barang['judul'] . " (" . $jumlahKeluar . " pcs)",
+        'keterangan' => "Penjualan/Barang Keluar: " . $barang['nama'] . " (" . $jumlahKeluar . " pcs)",
     ]);
 
     $pdo->commit();

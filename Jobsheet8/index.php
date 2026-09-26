@@ -66,8 +66,8 @@ try {
                     <p class="text-secondary mb-0">Kelola persediaan barang, pelanggan, dan arus kas harian toko dengan mudah.</p>
                 </div>
                 <div class="d-flex gap-2">
-                    <a href="/Jobsheet8/buku/tambah.php" class="btn btn-theme btn-sm">+ Tambah Barang</a>
-                    <a href="/Jobsheet8/anggota/tambah.php" class="btn btn-outline-secondary btn-sm">+ Tambah Pelanggan</a>
+                    <a href="/Jobsheet8/barang/tambah.php" class="btn btn-theme btn-sm">+ Tambah Barang</a>
+                    <a href="/Jobsheet8/pelanggan/tambah.php" class="btn btn-outline-secondary btn-sm">+ Tambah Pelanggan</a>
                 </div>
             </div>
         </section>
@@ -123,7 +123,7 @@ try {
                                 <?php endforeach; ?>
                             </ul>
                             <div class="mt-3 text-end">
-                                <a href="/Jobsheet8/buku/list.php" class="text-decoration-none small fw-semibold" style="color:#5c3d2e;">Lihat Semua Barang &rarr;</a>
+                                <a href="/Jobsheet8/barang/list.php" class="text-decoration-none small fw-semibold" style="color:#5c3d2e;">Lihat Semua Barang &rarr;</a>
                             </div>
                         <?php endif; ?>
                     </div>

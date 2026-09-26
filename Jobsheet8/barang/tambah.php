@@ -19,20 +19,20 @@ unset($_SESSION['flash']);
 
                 <form id="form-tambah" action="proses_tambah.php" method="POST">
                     <div class="mb-3">
-                        <label for="judul" class="form-label fw-semibold">Nama Barang</label>
-                        <input type="text" class="form-control" id="judul" name="judul" placeholder="Contoh: Minyak Goreng Bimoli 1L" required>
+                        <label for="nama" class="form-label fw-semibold">Nama Barang</label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Contoh: Minyak Goreng Bimoli 1L" required>
                     </div>
                     <div class="mb-3">
-                        <label for="pengarang" class="form-label fw-semibold">Produsen / Merek</label>
-                        <input type="text" class="form-control" id="pengarang" name="pengarang" placeholder="Contoh: PT Indofood" required>
+                        <label for="produsen" class="form-label fw-semibold">Produsen / Merek</label>
+                        <input type="text" class="form-control" id="produsen" name="produsen" placeholder="Contoh: PT Indofood" required>
                     </div>
                     <div class="mb-3">
                         <label for="tgl_masuk" class="form-label fw-semibold">Tanggal Barang Masuk</label>
                         <input type="date" class="form-control" id="tgl_masuk" name="tgl_masuk" required>
                     </div>
                     <div class="mb-3">
-                        <label for="isbn" class="form-label fw-semibold">Kode Barang / Barcode</label>
-                        <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Contoh: 899123456789">
+                        <label for="kode" class="form-label fw-semibold">Kode Barang</label>
+                        <input type="text" class="form-control" id="kode" name="kode" placeholder="Contoh: 899123456789">
                     </div>
                     <div class="mb-3">
                         <label for="harga" class="form-label fw-semibold">Harga Barang (Rp)</label>
@@ -45,8 +45,8 @@ unset($_SESSION['flash']);
                     <div class="mb-3">
                         <label for="kategori" class="form-label fw-semibold">Kategori Barang</label>
                         <select class="form-select" id="kategori" name="kategori" required>
-                            <option value="" disabled selected>-- Pilih Kategori --</option>
-                            <option value="Sembako">Sembako (Beras, Minyak, Gula, dll)</option>
+                            <option value="" disabled selected>Pilih Kategori</option>
+                            <option value="Sembako">Sembako</option>
                             <option value="Makanan & Minuman">Makanan & Minuman Ringan</option>
                             <option value="Bumbu & Dapur">Bumbu & Bahan Dapur</option>
                             <option value="Sabun & Kebersihan">Perlengkapan Mandi & Cuci</option>

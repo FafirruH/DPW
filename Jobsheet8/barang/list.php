@@ -20,7 +20,7 @@ $daftarBarang = $pdo->query("SELECT * FROM barang ORDER BY id DESC")->fetchAll(P
               <button type="button" id="btn-reload" class="btn btn-outline-secondary btn-sm" onclick="location.reload();">
                 Muat Ulang
               </button>
-              <a href="/Jobsheet8/buku/tambah.php" class="btn btn-theme btn-sm">
+              <a href="/Jobsheet8/barang/tambah.php" class="btn btn-theme btn-sm">
                 + Tambah Barang
               </a>
             </div>
@@ -57,32 +57,32 @@ $daftarBarang = $pdo->query("SELECT * FROM barang ORDER BY id DESC")->fetchAll(P
         <td colspan="7" class="text-center text-muted py-4">Belum ada data barang. Silakan tambah barang baru.</td>
       </tr>
     <?php else: ?>
-      <?php foreach ($daftarBarang as $buku): ?>
+      <?php foreach ($daftarBarang as $barang): ?>
         <tr>
-          <td class="fw-semibold"><?= htmlspecialchars($buku['judul']) ?></td>
-          <td><?= htmlspecialchars($buku['pengarang']) ?></td>
+          <td class="fw-semibold"><?= htmlspecialchars($barang['nama']) ?></td>
+          <td><?= htmlspecialchars($barang['produsen']) ?></td>
           <td>
-            <span class="badge bg-light text-dark border"><?= htmlspecialchars($buku['kategori'] ?? 'Umum') ?></span>
+            <span class="badge bg-light text-dark border"><?= htmlspecialchars($barang['kategori'] ?? 'Umum') ?></span>
           </td>
           <td class="text-center">
-              <?= !empty($buku['tahun']) ? htmlspecialchars(date('d/m/Y', strtotime($buku['tahun']))) : '-' ?>
+              <?= !empty($barang['tahun']) ? htmlspecialchars(date('d/m/Y', strtotime($barang['tahun']))) : '-' ?>
           </td>
           <td class="text-end fw-semibold">
-              Rp <?= number_format($buku['harga'] ?? 0, 0, ',', '.') ?>
+              Rp <?= number_format($barang['harga'] ?? 0, 0, ',', '.') ?>
           </td>
           <td class="text-center">
-            <?php if ($buku['stok'] <= 0): ?>
+            <?php if ($barang['stok'] <= 0): ?>
               <span class="badge bg-danger">Habis</span>
-            <?php elseif ($buku['stok'] <= 5): ?>
-              <span class="badge bg-warning text-dark"><?= $buku['stok'] ?> pcs</span>
+            <?php elseif ($barang['stok'] <= 5): ?>
+              <span class="badge bg-warning text-dark"><?= $barang['stok'] ?> pcs</span>
             <?php else: ?>
-              <span class="badge bg-success"><?= $buku['stok'] ?> pcs</span>
+              <span class="badge bg-success"><?= $barang['stok'] ?> pcs</span>
             <?php endif; ?>
           </td>
           <td class="text-center">
-            <a href="/Jobsheet8/buku/hapus.php?id=<?= $buku['id'] ?>" 
+            <a href="/Jobsheet8/barang/hapus.php?id=<?= $barang['id'] ?>" 
                class="btn btn-sm btn-outline-danger" 
-               onclick="return confirm('Apakah Anda yakin ingin menghapus barang <?= htmlspecialchars(addslashes($buku['judul'])) ?>?');">
+               onclick="return confirm('Apakah Anda yakin ingin menghapus barang <?= htmlspecialchars(addslashes($barang['nama'])) ?>?');">
                Hapus
             </a>
           </td>
@@ -96,6 +96,6 @@ $daftarBarang = $pdo->query("SELECT * FROM barang ORDER BY id DESC")->fetchAll(P
       </section>
     </main>
 
-    <script src="/assets/js/buku.js"></script>
+    <script src="/assets/js/barang.js"></script>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>

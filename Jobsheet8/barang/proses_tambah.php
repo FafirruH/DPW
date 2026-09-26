@@ -2,19 +2,19 @@
 session_start();
 require __DIR__ . '/../includes/koneksi.php';
 
-$judul     = trim($_POST['judul'] ?? '');
-$pengarang = trim($_POST['pengarang'] ?? '');
+$nama     = trim($_POST['nama'] ?? '');
+$produsen = trim($_POST['produsen'] ?? '');
 $tglMasuk  = $_POST['tgl_masuk'] ?? '';
-$isbn      = trim($_POST['isbn'] ?? '');
+$kode      = trim($_POST['kode'] ?? '');
 $harga     = $_POST['harga'] ?? 0;
 $stok      = $_POST['stok'] ?? 0;
 $kategori  = trim($_POST['kategori'] ?? '');
 
 $errors = [];
-if ($judul === '') {
+if ($nama === '') {
     $errors[] = "Nama barang wajib diisi.";
 }
-if ($pengarang === '') {
+if ($produsen === '') {
     $errors[] = "Produsen / Merek wajib diisi.";
 }
 if ($tglMasuk === '') {
@@ -40,15 +40,15 @@ try {
     $pdo->beginTransaction();
 
     $stmt = $pdo->prepare(
-    "INSERT INTO barang (judul, pengarang, tahun, isbn, harga, stok, kategori)
-     VALUES (:judul, :pengarang, :tahun, :isbn, :harga, :stok, :kategori)
+    "INSERT INTO barang (nama, produsen, tahun, kode, harga, stok, kategori)
+     VALUES (:nama, :produsen, :tahun, :kode, :harga, :stok, :kategori)
      RETURNING id"
 );
     $stmt->execute([
-        'judul'     => $judul,
-        'pengarang' => $pengarang,
+        'nama'     => $nama,
+        'produsen' => $produsen,
         'tahun'     => $tglMasuk,
-        'isbn'      => $isbn,
+        'kode'      => $kode,
         'harga'     => (float) $harga,
         'stok'      => (int) $stok,
         'kategori'  => $kategori,
@@ -62,7 +62,7 @@ try {
         );
         $stmtTrx->execute([
             'nominal'    => $totalPengeluaran,
-            'keterangan' => "Pembelian/Stok Masuk: " . $judul . " (" . $stok . " pcs)",
+            'keterangan' => "Pembelian/Stok Masuk: " . $nama . " (" . $stok . " pcs)",
             'tanggal'    => $tglMasuk
         ]);
     }

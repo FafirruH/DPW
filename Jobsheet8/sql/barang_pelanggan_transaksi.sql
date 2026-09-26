@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS barang (
     id SERIAL PRIMARY KEY,
-    judul VARCHAR(255) NOT NULL,
-    pengarang VARCHAR(255) NOT NULL,
+    nama VARCHAR(255) NOT NULL,
+    produsen VARCHAR(255) NOT NULL,
     tahun VARCHAR(50) NOT NULL,
-    isbn VARCHAR(50),
+    kode VARCHAR(50),
     harga NUMERIC NOT NULL DEFAULT 0,
     stok INTEGER NOT NULL DEFAULT 0,
     kategori VARCHAR(50)
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS barang (
 CREATE TABLE IF NOT EXISTS pelanggan (
     id SERIAL PRIMARY KEY,
     nama VARCHAR(255) NOT NULL,
-    no_anggota VARCHAR(50) NOT NULL UNIQUE,
+    no_pelanggan VARCHAR(50) NOT NULL UNIQUE,
     alamat VARCHAR(255),
     no_hp VARCHAR(30)
 );
