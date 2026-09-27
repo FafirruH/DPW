@@ -21,8 +21,8 @@ File `index.html` ini berfungsi sebagai **pintu masuk utama (Hub Navigasi)** unt
 ### **Fitur Utama:**
 * **Responsive Grid System**: Menggunakan Bootstrap 5 untuk memastikan tampilan optimal di layar *mobile*, tablet, maupun desktop.
 * **Warm Theme Aesthetic**: Mengusung skema warna *Warm Chocolate & Cream* yang konsisten dengan identitas aplikasi SIMPUS Toko Kelontong.
-* **Direct Folder Routing**: Tautan langsung ke sub-folder bersih tanpa spasi (`./Jobsheet1/` hingga `./Jobsheet8/`).
-* **Visual Locking Effect**: Efek visual *blur*, *overlay*, dan pointer `not-allowed` untuk menandai modul yang belum dirilis/diakses (Jobsheet 9 – 13).
+* **Direct Folder Routing**: Tautan langsung ke sub-folder bersih tanpa spasi (`./Jobsheet1/` hingga `./Jobsheet10/`).
+* **Visual Locking Effect**: Efek visual *blur*, *overlay*, dan pointer `not-allowed` untuk menandai modul yang belum dirilis/diakses (Jobsheet 11 – 13).
 
 ---
 
@@ -39,6 +39,8 @@ File `index.html` ini berfungsi sebagai **pintu masuk utama (Hub Navigasi)** unt
 ├── Jobsheet6/              <-- Fetch API & JSON
 ├── Jobsheet7/              <-- PHP Dasar & Form Handling
 └── Jobsheet8/              <-- Koneksi PostgreSQL
+└── Jobsheet9/              <-- CRUD Penuh
+└── Jobsheet10/             <-- Autentikasi & Manajemen Sesi
 ```
 
 

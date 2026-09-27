@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS barang (
+    id SERIAL PRIMARY KEY,
+    nama VARCHAR(255) NOT NULL,
+    produsen VARCHAR(255) NOT NULL,
+    tahun VARCHAR(50) NOT NULL,
+    kode VARCHAR(50),
+    harga NUMERIC NOT NULL DEFAULT 0,
+    stok INTEGER NOT NULL DEFAULT 0,
+    kategori VARCHAR(50)
+);
+
+CREATE TABLE IF NOT EXISTS pelanggan (
+    id SERIAL PRIMARY KEY,
+    nama VARCHAR(255) NOT NULL,
+    no_pelanggan VARCHAR(50) NOT NULL UNIQUE,
+    alamat VARCHAR(255),
+    no_hp VARCHAR(30)
+);
+
+CREATE TABLE IF NOT EXISTS transaksi (
+    id SERIAL PRIMARY KEY,
+    jenis VARCHAR(20) NOT NULL,
+    nominal NUMERIC NOT NULL DEFAULT 0,
+    keterangan VARCHAR(255),
+    tanggal DATE NOT NULL DEFAULT CURRENT_DATE
+);
