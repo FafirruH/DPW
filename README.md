@@ -1,5 +1,3 @@
-Dokumentasi teknis, panduan penggunaan, dan materi pembelajaran untuk antarmuka navigasi utama (*landing page*) proyek **SIMPUS Toko Kelontong**.
-
 ---
 
 ## 📌 DAFTAR ISI
@@ -29,7 +27,7 @@ File `index.html` ini berfungsi sebagai **pintu masuk utama (Hub Navigasi)** unt
 ## 2. STRUKTUR DIREKTORI
 
 ```
-├── api                     <-- 
+├── api                     <-- Folder khusus (reserved directory) yang digunakan untuk meletakkan kode backend / API endpoint.
 ├── index.html              <-- File Landing Page Navigasi Utama
 ├── README.md               <-- Panduan & Dokumentasi
 ├── Jobsheet1/              <-- HTML5 Semantic Skeleton
@@ -44,7 +42,7 @@ File `index.html` ini berfungsi sebagai **pintu masuk utama (Hub Navigasi)** unt
 ├── Jobsheet10/             <-- Autentikasi & Manajemen Sesi
 ├── Jobsheet11/             <-- Keamanan Web Dasar
 ├── Jobsheet12/             <-- Integrasi Modul Peminjaman
-└── vercel.json             <-- 
+└── vercel.json             <-- File konfigurasi dalam format JSON yang mengontrol perilaku deployment proyek Anda di platform Vercel.
 ```
 
 
@@ -65,6 +63,24 @@ File `index.html` ini berfungsi sebagai **pintu masuk utama (Hub Navigasi)** unt
 ---
 
 ## 4. PENJELASAN DETAIL CARA KERJA KODE
+
+### Fungsi Folder api/
+Pada arsitektur modern seperti Vercel, folder api/ adalah folder khusus (reserved directory) yang digunakan untuk meletakkan kode backend / API endpoint.
+
+Serverless Functions: Setiap file di dalam folder api/ (seperti api/index.php atau api/users.js) akan diubah oleh Vercel menjadi Serverless Function. Artinya, server backend tidak berjalan terus-menerus 24/7, melainkan hanya menyala dan mengeksekusi kode saat ada permintaan (request) dari pengguna.
+
+Penanganan PHP di Cloud: Karena Vercel secara default ditujukan untuk aplikasi statis/Node.js, folder api/ ini dipadukan dengan runtime khusus (misalnya vercel-php) agar script PHP dapat berjalan dan memproses logika server (seperti koneksi ke database PostgreSQL Neon, otentikasi, atau query data).
+
+Keamanan: Memisahkan skrip eksekusi backend di folder api/ mencegah source code backend terekspos secara mentah ke browser.
+
+### Fungsi File vercel.json
+File vercel.json adalah file konfigurasi dalam format JSON yang mengontrol perilaku deployment proyek Anda di platform Vercel.
+
+Penanganan Runtime (Builders): Memberitahu Vercel mesin atau community runtime mana yang harus digunakan untuk memproses file tertentu. Contohnya, mengarahkan file .php agar dieksekusi menggunakan runtime PHP (vercel-php).
+
+Routing & URL Rewriting: Mengatur aturan pengalihan URL (URL rewrite/redirect). Misalnya, jika pengguna mengakses [http://domain.com/Jobsheet8/](http://domain.com/Jobsheet8/), vercel.json dapat mengarahkan request tersebut secara internal ke api/Jobsheet8.php tanpa mengubah URL di browser pengguna.
+
+Environment Variables & Headers: Mengatur variabel lingkungan, aturan CORS (Cross-Origin Resource Sharing), serta header keamanan HTTP secara global untuk seluruh proyek.
 
 ### **A. Konfigurasi Variabel CSS & Tema**
 
