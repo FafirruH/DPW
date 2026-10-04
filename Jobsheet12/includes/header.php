@@ -30,7 +30,8 @@ $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
             <a class="navbar-brand d-flex align-items-center gap-2" href="<?= $base ?>index.php">
                 <span>Toko Madura</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Buka atau tutup menu navigasi">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <nav class="collapse navbar-collapse" id="navMenu">
@@ -39,18 +40,16 @@ $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
                     <li class="nav-item"><a class="nav-link" href="<?= $base ?>barang/list.php">Barang</a></li>
                     <?php if ($sudahLogin): ?>
                     <li class="nav-item"><a class="nav-link" href="<?= $base ?>pelanggan/list.php">Pelanggan</a></li>
-                    <!-- TAMBAHAN MENU BARU -->
-                    <li class="nav-item"><a class="nav-link text-warning fw-semibold"
+                    <li class="nav-item"><a class="nav-link"
                             href="<?= $base ?>transaksi/riwayat.php">Riwayat Transaksi</a></li>
                     <?php endif; ?>
                 </ul>
-                <div class="d-flex align-items-center gap-3 ms-auto mt-3 mt-lg-0">
+                <div class="navbar-actions d-flex align-items-center gap-3 ms-auto mt-3 mt-lg-0">
                     <?php if ($sudahLogin): ?>
-                    <span class="text-light fw-medium small">Halo, <?= e($_SESSION['nama']) ?></span>
-                    <a href="<?= $base ?>auth/logout.php" class="btn btn-outline-light btn-sm px-3">Logout</a>
+                    <span class="nav-user"><i class="fa-regular fa-user" aria-hidden="true"></i><span>Halo, <?= e($_SESSION['nama']) ?></span></span>
+                    <a href="<?= $base ?>auth/logout.php" class="btn btn-outline-light btn-sm nav-auth-button">Logout</a>
                     <?php else: ?>
-                    <a href="<?= $base ?>auth/login.php" class="btn btn-theme btn-sm px-4"
-                        style="background-color: var(--accent-terracotta);">Login</a>
+                    <a href="<?= $base ?>auth/login.php" class="btn btn-outline-light btn-sm nav-auth-button">Login</a>
                     <?php endif; ?>
                 </div>
             </nav>

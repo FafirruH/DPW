@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Penjelasan kode dan alur pada Jobsheet 1 sampai 12 proyek DPW.">
+    <title>Penjelasan Kode Jobsheet | DPW</title>
+    <style>
+        :root{color-scheme:light;--primary-color:#5c3d2e;--primary-hover:#43281c;--dark-chocolate:#2c1d11;--bg-cream:#f8f4e9;--border-color:#e6ddc4;--ink:#3d2b1f;--muted:#6c584b;--paper:#fff}
+        *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:76px}body{margin:0;background:var(--bg-cream);color:var(--ink);font:16px/1.7 system-ui,"Segoe UI",sans-serif}
+        a{color:var(--primary-color)}a:hover{color:var(--primary-hover)}.wrap{width:min(1120px,calc(100% - 36px));margin:auto}.top{position:sticky;top:0;z-index:2;background:var(--dark-chocolate);border-bottom:1px solid var(--border-color);box-shadow:0 2px 8px rgba(44,29,17,.15)}.top .wrap{min-height:60px;display:flex;align-items:center;justify-content:space-between}.top a{color:#fff;text-decoration:none}.top a:hover{color:#e6ddc4}.brand{font-weight:850;letter-spacing:.04em}.hero p.tag{color:#fff}
+        .hero{padding:48px 0 28px}.hero h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.1;margin:8px 0;color:var(--dark-chocolate)}.hero p{max-width:850px;color:var(--muted)}.note,.card{background:var(--paper);border:1px solid var(--border-color);border-radius:14px;padding:20px;margin:16px 0}.note{background:#f1ead8;border-left:4px solid var(--primary-color)}.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:22px;padding-bottom:52px}.toc{position:sticky;top:78px;align-self:start;max-height:calc(100vh - 92px);overflow:auto}.toc a{display:block;padding:3px 0;text-decoration:none}.toc a:hover{text-decoration:underline}.card h2{margin:0 0 8px;color:var(--primary-color);font-size:1.45rem}.card h3{margin:18px 0 5px;font-size:1.05rem;color:var(--dark-chocolate)}.card p{margin:7px 0}.card li{margin:5px 0}.tag,code{font-family:ui-monospace,Consolas,monospace;border-radius:4px;padding:1px 5px}.tag{font-size:.9em;background:var(--primary-color);color:#fff}.card code{background:#f1ead8;color:var(--primary-hover)}.small{color:var(--muted);font-size:.94rem}pre{overflow:auto;padding:14px;border-radius:9px;background:var(--dark-chocolate);color:#fff;line-height:1.5}pre code{padding:0;background:transparent;color:inherit}.footer{padding:22px 0;border-top:1px solid var(--border-color);color:var(--muted)}
+        @media(max-width:760px){.layout{grid-template-columns:1fr}.toc{position:static;max-height:none}.toc nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 10px}.hero{padding-top:32px}}@media(max-width:480px){.toc nav{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:16px}}
+    </style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="#atas">HANDBOOK JOBSHEET</a><a href="#daftar">Ke daftar jobsheet ↓</a></div></header>
+<main id="atas">
+    <section class="hero wrap">
+        <p class="tag">Panduan membaca kode proyek</p>
+        <h1>Apa yang dilakukan kode di setiap Jobsheet?</h1>
+        <p>Proyek ini berkembang dari halaman perpustakaan statis, menjadi halaman interaktif, lalu menjadi aplikasi PHP yang menyimpan data dan transaksi di PostgreSQL. Bagian di bawah menjelaskan fungsi berkas yang tersedia dan perubahan penting di setiap tahap.</p>
+        <div class="note"><strong>Catatan:</strong> Jobsheet 1–7 membangun aplikasi perpustakaan mini (SIMPUS). Jobsheet 8–12 beralih menjadi aplikasi inventaris dan penjualan. Sebagian besar kode yang sama disalin dari jobsheet sebelumnya; yang dijelaskan di tiap bagian adalah fungsi file dan perkembangan yang tampak pada folder tersebut.</div>
+    </section>
+    <div class="wrap layout">
+        <aside class="toc card" id="daftar"><strong>Daftar Jobsheet</strong><nav>
+            <a href="#dasar">Pola umum</a><a href="#css">Cara kerja CSS</a><a href="#javascript">Cara kerja JavaScript</a><a href="#php">Cara kerja PHP</a><a href="#job1">Jobsheet 1</a><a href="#job2">Jobsheet 2</a><a href="#job3">Jobsheet 3</a><a href="#job4">Jobsheet 4</a><a href="#job5">Jobsheet 5</a><a href="#job6">Jobsheet 6</a><a href="#job7">Jobsheet 7</a><a href="#job8">Jobsheet 8</a><a href="#job9">Jobsheet 9</a><a href="#job10">Jobsheet 10</a><a href="#job11">Jobsheet 11</a><a href="#job12">Jobsheet 12</a>
+        </nav></aside>
+        <div>
+            <section class="card" id="dasar">
+                <h2>Pola umum file dan alurnya</h2>
+                <ul>
+                    <li><code>index.html</code> atau <code>index.php</code> adalah halaman beranda. HTML menyusun judul, menu, konten, tabel, dan formulir. PHP pada beranda yang lebih baru juga dapat mengambil data untuk ringkasan dashboard.</li>
+                    <li>Folder <code>buku/</code>, <code>anggota/</code>, <code>barang/</code>, dan <code>pelanggan/</code> memisahkan halaman menurut jenis data. <code>list</code> menampilkan tabel, <code>tambah</code>/<code>edit</code> menampilkan formulir, sedangkan <code>proses_tambah</code>, <code>proses_edit</code>, <code>proses_beli</code>, dan sejenisnya menerima kiriman formulir lalu mengubah data.</li>
+                    <li><code>assets/css/style.css</code> mengatur warna, ukuran, tata letak, tabel, formulir, dan tampilan layar kecil. File JavaScript di <code>assets/js/</code> menambahkan respons pada klik, pencarian, pemuatan data, atau validasi formulir.</li>
+                    <li><code>includes/header.php</code> dan <code>footer.php</code> adalah potongan tata letak bersama yang disisipkan di banyak halaman agar menu, tautan CSS/JavaScript, dan footer konsisten. <code>koneksi.php</code> menyiapkan koneksi basis data PDO.</li>
+                    <li>File <code>.json</code> berisi contoh/penyimpanan data berbentuk JSON; file <code>.sql</code> berisi perintah untuk membuat tabel basis data. README, laporan, wireframe, dan infografis adalah dokumentasi, bukan instruksi yang dijalankan aplikasi.</li>
+                </ul>
+                <p><strong>Alur data aplikasi PHP:</strong> pengguna mengirim form dengan POST → handler memeriksa input → data disimpan/diubah di session atau database → pesan sementara disimpan di session → browser diarahkan kembali ke halaman daftar. Tautan GET umumnya dipakai untuk membuka halaman atau memilih data berdasarkan ID.</p>
+            </section>
+            <section class="card" id="css">
+                <h2>Cara kerja CSS — mengubah aturan menjadi tampilan</h2>
+                <p>CSS (Cascading Style Sheets) tidak mengubah isi data. Ia memberi aturan visual kepada elemen HTML. Browser memuat HTML, membaca aturan CSS yang dirujuk lewat <code>&lt;link rel="stylesheet"&gt;</code> atau tag <code>&lt;style&gt;</code>, mencocokkan selector, lalu menghitung aturan mana yang menang sebelum menggambar halaman.</p>
+                <h3>1. Selector memilih elemen</h3>
+                <ul><li><code>body</code> memilih elemen body; <code>header nav a</code> memilih tautan yang berada di dalam nav dalam header.</li><li><code>.btn-theme</code> memilih elemen dengan class tersebut. Satu elemen dapat mempunyai beberapa class Bootstrap dan class proyek sekaligus.</li><li><code>#navMenu</code> memilih elemen dengan id itu. Id seharusnya unik dalam satu halaman.</li><li><code>:hover</code> dan <code>:focus</code> adalah pseudo-class: aturan berlaku saat kursor berada di elemen atau elemen menerima fokus keyboard.</li></ul>
+                <h3>2. Deklarasi berisi properti dan nilai</h3>
+                <pre><code>.btn-theme {
+    background-color: #1d5b8a;
+    color: #fff;
+    padding: .65rem 1.5rem;
+}
+.btn-theme:hover {
+    background-color: #17496e;
+}</code></pre>
+                <p>Nama sebelum kurung kurawal adalah selector. Setiap baris di dalamnya adalah deklarasi: properti seperti <code>color</code> atau <code>padding</code> diberi nilai. Aturan pertama memberi warna dan ruang tombol; aturan <code>:hover</code> mengganti warna saat pointer berada di atas tombol.</p>
+                <h3>3. Cascade, class, dan Bootstrap</h3>
+                <p>Jika beberapa aturan mengatur properti yang sama, browser menerapkan cascade: prioritas asal/important, kekhususan selector (specificity), lalu urutan aturan bila kekhususannya setara. Karena jobsheet memuat Bootstrap dan CSS proyek, aturan khusus proyek biasanya diletakkan setelah Bootstrap agar dapat menimpa gaya dasarnya. Inline style pada atribut <code>style</code> cenderung lebih kuat dari selector biasa; hindari <code>!important</code> kecuali memang dibutuhkan.</p>
+                <h3>4. Box model dan tata letak</h3>
+                <p>Setiap elemen dapat dipahami sebagai kotak: <code>content</code> (isi), <code>padding</code> (ruang di dalam), <code>border</code> (garis), dan <code>margin</code> (jarak luar). Aturan <code>* { box-sizing: border-box; }</code> membuat ukuran yang ditetapkan sudah menghitung padding dan border. Flexbox cocok untuk menyusun item satu arah; Grid cocok untuk baris/kolom; class Bootstrap seperti <code>container</code>, <code>row</code>, dan <code>col-md-4</code> menyediakan pola layout siap pakai.</p>
+                <h3>5. Responsive dan perubahan tema</h3>
+                <p>Media query seperti <code>@media (max-width: 760px)</code> mengaktifkan aturan hanya pada layar yang lebih sempit. Jobsheet awal memakai aturan CSS dasar; tahap berikut memanfaatkan grid/responsive Bootstrap, dan stylesheet yang lebih baru menggunakan breakpoint. Custom property seperti <code>--green</code> di <code>:root</code> adalah nilai bersama: <code>color: var(--green)</code> memakai warna yang sama di banyak komponen. Jika tampilan tidak berubah, periksa alamat CSS pada <code>href</code>, selector/class pada HTML, urutan stylesheet, dan cache browser.</p>
+            </section>
+            <section class="card" id="javascript">
+                <h2>Cara kerja JavaScript — menghubungkan halaman dengan tindakan</h2>
+                <p>JavaScript (JS) pada jobsheet berjalan di browser. Tag <code>&lt;script src="..."&gt;</code> memuat file, browser membaca perintahnya, lalu kode dapat mencari elemen HTML, mendengar event (klik, submit, ketikan), dan memperbarui tampilan. File umum ada di <code>assets/js/app.js</code>; file khusus seperti <code>buku.js</code> dan <code>anggota.js</code> menangani tabel masing-masing.</p>
+                <h3>1. Tunggu DOM siap, lalu pasang event</h3>
+                <pre><code>document.addEventListener("DOMContentLoaded", function () {
+    initTableFilter();
+    initValidasiForm();
+});</code></pre>
+                <p><code>DOMContentLoaded</code> berjalan setelah browser membentuk elemen HTML. Dengan menunggu event ini, pencarian selector seperti <code>getElementById()</code> tidak dijalankan terlalu dini. Fungsi inisialisasi biasanya memeriksa apakah elemennya ada; jika tidak ada di halaman tersebut, fungsi berhenti tanpa error.</p>
+                <h3>2. Event menghubungkan aksi pengguna dan respons kode</h3>
+                <p>Pola umumnya: pilih elemen dengan <code>querySelector()</code>/<code>getElementById()</code> → pasang <code>addEventListener()</code> → baca nilai atau elemen terkait → ubah hasil. Pada filter tabel, event <code>keyup</code> membaca kata pencarian, mengambil teks tiap baris, lalu menyembunyikan baris yang tidak cocok dengan mengatur <code>row.style.display</code>. Pada validasi form, event <code>submit</code> memeriksa field. Jika tidak valid, <code>event.preventDefault()</code> membatalkan pengiriman dan pesan error ditambahkan ke halaman.</p>
+                <h3>3. Fetch API memuat JSON secara asinkron</h3>
+                <p>Di Jobsheet 6, fungsi <code>async</code> menjalankan <code>fetch("../data/buku.json")</code>. <code>await</code> menunggu respons jaringan tanpa membekukan seluruh halaman; <code>response.ok</code> memastikan server berhasil, lalu <code>response.json()</code> mengubah teks JSON menjadi array/objek JavaScript. Program membuat baris tabel dan menambahkannya ke <code>tbody</code>. Bagian <code>try/catch/finally</code> menangani error dan selalu menyembunyikan indikator loading setelah selesai.</p>
+                <h3>4. Batas perilaku front-end</h3>
+                <p>Konfirmasi hapus yang hanya menjalankan <code>row.remove()</code> menghapus baris dari tampilan saat itu saja; ia tidak menghapus data di server atau database. Supaya perubahan tersimpan, tombol harus mengirim request ke handler PHP. Validasi JavaScript juga untuk kenyamanan pengguna saja: request dapat dibuat tanpa menjalankan JS, sehingga PHP tetap wajib memvalidasi input di server. Data eksternal sebaiknya dimasukkan dengan <code>textContent</code> atau di-escape, bukan digabung mentah ke <code>innerHTML</code>.</p>
+            </section>
+            <section class="card" id="php">
+                <h2>Cara kerja PHP — memproses request di server</h2>
+                <p>PHP dijalankan oleh web server (misalnya Apache/Laragon), bukan oleh browser pengguna. Ketika browser meminta file <code>.php</code>, server menjalankan kode PHP dan mengirim hasilnya—biasanya HTML—ke browser. Karena itu, pengguna melihat hasil halaman, bukan kode PHP mentah. Kode PHP dapat membuat halaman dari database, memeriksa login, atau menerima form.</p>
+                <h3>1. Request GET dan POST</h3>
+                <p><code>$_GET</code> berisi nilai dari query URL, misalnya <code>edit.php?id=7</code> untuk memilih rekaman. <code>$_POST</code> berisi data yang dikirim form dengan <code>method="POST"</code>, lazimnya untuk menyimpan perubahan. Handler seperti <code>proses_tambah.php</code> membaca POST, memangkas spasi dengan <code>trim()</code>, memeriksa nilai, lalu memilih apakah menyimpan atau mengembalikan pengguna dengan redirect.</p>
+                <h3>2. Validasi dan output aman</h3>
+                <p>Validasi memastikan nilai sesuai aturan bisnis, misalnya nama wajib, harga angka dan tidak negatif, serta stok bilangan yang masuk akal. Validasi harus dilakukan di server karena nilai dari browser tidak dapat dipercaya. Saat menampilkan teks yang berasal dari pengguna/database ke HTML, helper <code>e()</code> memakai <code>htmlspecialchars(..., ENT_QUOTES, 'UTF-8')</code> agar karakter seperti <code>&lt;</code> dan tanda kutip tidak ditafsirkan sebagai markup/script.</p>
+                <h3>3. PDO dan prepared statement</h3>
+                <pre><code>$stmt = $pdo-&gt;prepare(
+    "SELECT * FROM barang WHERE id = :id"
+);
+$stmt-&gt;execute(['id' =&gt; $id]);
+$barang = $stmt-&gt;fetch(PDO::FETCH_ASSOC);</code></pre>
+                <p><code>koneksi.php</code> membuat objek PDO dari konfigurasi koneksi. <code>prepare()</code> menyiapkan SQL dengan placeholder; <code>execute()</code> mengirim nilai ID terpisah dari teks SQL; <code>fetch()</code> mengambil satu baris sebagai array. Prepared statement membantu mencegah nilai masukan diperlakukan sebagai bagian dari perintah SQL. Halaman <code>list.php</code> biasanya memakai <code>fetchAll()</code> untuk mengambil banyak rekaman lalu mengulanginya dengan <code>foreach</code>.</p>
+                <h3>4. Session, flash message, dan redirect</h3>
+                <p><code>session_start()</code> membuka data session milik browser yang disimpan di sisi server. Session dipakai untuk status login dan pesan singkat antar-request. Handler menyimpan misalnya <code>$_SESSION['flash']</code>, lalu mengirim header <code>Location</code> untuk mengarahkan browser ke halaman daftar. Halaman tujuan membaca dan menampilkan pesan tersebut. Setelah mengirim header redirect, <code>exit</code> menghentikan proses agar kode berikutnya tidak ikut dijalankan.</p>
+                <h3>5. PDO transaction, autentikasi, dan CSRF</h3>
+                <p><code>beginTransaction()</code> membuka satu rangkaian perubahan database; <code>commit()</code> menyimpan semuanya; <code>rollBack()</code> membatalkan semuanya bila terjadi kegagalan. Ini penting untuk proses seperti pembelian: kurangi stok dan catat transaksi harus sama-sama berhasil. <code>auth.php</code> memeriksa identitas pada session sebelum halaman terbatas ditampilkan. Token CSRF dibuat dan disimpan di session, dimasukkan sebagai field tersembunyi dalam form, lalu diverifikasi oleh handler POST untuk memastikan form berasal dari sesi halaman yang sah.</p>
+                <p class="small"><strong>Ringkas alur server:</strong> browser mengirim request → PHP memeriksa login/CSRF dan validasi → PHP membaca/menulis database dengan PDO → PHP menyimpan flash message bila perlu → PHP mengirim halaman atau redirect → browser merender HTML dan CSS, kemudian JavaScript mengaktifkan interaksi.</p>
+            </section>
+            <section class="card" id="job1"><h2>Jobsheet 1 — struktur HTML</h2>
+                <p>Latihan awal membentuk prototipe SIMPUS dengan HTML statis. Angka ringkasan dan baris tabel adalah contoh yang ditulis langsung di dokumen, belum diambil dari penyimpanan data.</p>
+                <ul><li><code>index.html</code>: header dan navigasi, bagian sambutan, tiga kartu ringkasan (buku, anggota, pinjaman), serta footer.</li><li><code>buku/list.html</code> dan <code>anggota/list.html</code>: tabel contoh untuk memperlihatkan daftar buku/anggota. Tombol aksi hanya tampilan; pada tahap ini belum mengubah data.</li><li><code>buku/tambah.html</code> dan <code>anggota/tambah.html</code>: formulir input dengan label dan field yang sesuai jenis data.</li></ul>
+                <p class="small">Tag seperti <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>table</code>, <code>form</code>, dan <code>footer</code> memberi struktur semantik. Tautan <code>href</code> menghubungkan halaman-halaman tersebut.</p>
+            </section>
+            <section class="card" id="job2"><h2>Jobsheet 2 — CSS terpisah</h2>
+                <p>Halaman SIMPUS dari tahap sebelumnya tetap statis, tetapi kini memanggil <code>assets/css/style.css</code>. File CSS menerapkan gaya dasar pada body, header/menu, konten, kartu ringkasan, tabel, form, dan footer.</p>
+                <p>Selector seperti <code>header</code>, <code>table</code>, atau <code>form</code> memilih elemen HTML; deklarasi seperti <code>color</code>, <code>padding</code>, dan <code>background-color</code> menentukan tampilannya. Hubungan HTML dan CSS terjadi melalui tag <code>link</code> di bagian <code>head</code>. Data dan tombol tetap belum dinamis.</p>
+            </section>
+            <section class="card" id="job3"><h2>Jobsheet 3 — layout responsif dan komponen</h2>
+                <p>Struktur tetap berupa halaman statis buku dan anggota. <code>assets/css/style.css</code> mengatur warna, jarak, kartu, serta layout daftar/ringkasan. Meta <code>viewport</code> membantu halaman menyesuaikan lebar layar. Halaman daftar dan form memiliki navigasi yang sama.</p>
+                <p>Baris tabel, angka ringkasan, dan form masih ditulis di HTML. Tombol Edit/Hapus belum melakukan operasi penyimpanan. File di <code>docs/wireframe.md</code> menjelaskan rancangan tampilan; <code>laporan.md</code> mendokumentasikan modifikasi CSS.</p>
+            </section>
+            <section class="card" id="job4"><h2>Jobsheet 4 — konsistensi halaman dan wireframe</h2>
+                <p>Folder ini melanjutkan pola HTML + CSS dari Jobsheet 3. <code>index.html</code>, halaman buku, dan halaman anggota membentuk halaman statis yang saling terhubung dengan tautan relatif. <code>assets/css/style.css</code> menjadi sumber gaya bersama sehingga perubahan tema dapat diterapkan ke semua halaman.</p>
+                <p><code>docs/wireframe.md</code> berisi rancangan antarmuka dan <code>Infografis.png</code> adalah bahan visual. Keduanya membantu dokumentasi, tetapi tidak dieksekusi seperti HTML atau CSS.</p>
+            </section>
+            <section class="card" id="job5"><h2>Jobsheet 5 — Bootstrap dan dasar JavaScript</h2>
+                <p>Halaman SIMPUS menggunakan Bootstrap melalui CDN untuk navbar, grid, kartu, tombol, tabel, dan form; <code>assets/css/style.css</code> menambahkan gaya proyek. Meta viewport dan komponen Bootstrap membantu tampilan menyesuaikan layar.</p>
+                <ul><li><code>index.html</code>, halaman di <code>buku/</code> dan <code>anggota/</code>: halaman beranda, daftar, dan formulir yang berpindah dengan tautan.</li><li><code>login.html</code>: contoh form masuk; karena file hanya HTML, form belum memverifikasi akun di server.</li><li><code>assets/js/app.js</code>: perilaku sisi browser seperti toggle menu, konfirmasi aksi, filter tabel, dan validasi isian jika elemen terkait tersedia.</li></ul>
+                <p>Bootstrap JavaScript dipanggil untuk komponen interaktif Bootstrap, misalnya tombol navbar. Belum ada backend yang menyimpan data permanen pada tahap ini.</p>
+            </section>
+            <section class="card" id="job6"><h2>Jobsheet 6 — data JSON dan fetch</h2>
+                <p>Daftar buku dan anggota kini dirender dari file JSON melalui JavaScript, bukan seluruhnya ditulis sebagai baris tabel tetap.</p>
+                <ul><li><code>data/buku.json</code> dan <code>data/anggota.json</code>: contoh rekaman dalam format array JSON.</li><li><code>assets/js/buku.js</code> dan <code>anggota.js</code>: fungsi async memakai <code>fetch()</code> untuk meminta JSON, mengubah respons menjadi objek, membuat elemen baris, dan memasukkannya ke <code>tbody</code>. Indikator loading ditampilkan selama proses; kegagalan request ditampilkan sebagai pesan pada tabel.</li><li><code>assets/js/app.js</code>: fitur umum seperti pencarian, konfirmasi, menu, atau validasi form. Halaman daftar menyediakan tombol muat ulang yang memanggil ulang fungsi pemuatan data.</li><li>Halaman HTML menyediakan wadah tabel kosong, label pencarian, indikator loading, dan tautan ke skrip yang mengisinya.</li></ul>
+                <p class="small">JSON pada tahap ini adalah data contoh yang dibaca browser. Fetch dari file lokal biasanya perlu dijalankan lewat web server lokal, bukan dibuka sebagai <code>file://</code>.</p>
+            </section>
+            <section class="card" id="job7"><h2>Jobsheet 7 — PHP, session, dan form POST</h2>
+                <p>Aplikasi berpindah dari halaman HTML statis ke PHP. <code>index.php</code>, halaman daftar/form di <code>buku/</code> dan <code>anggota/</code>, serta <code>includes/header.php</code>/<code>footer.php</code> membentuk tampilan server-rendered. File JSON menjadi data contoh yang disediakan dalam folder.</p>
+                <ul><li><code>buku/list.php</code> dan <code>anggota/list.php</code> menyusun tabel dari data PHP/session. <code>tambah.php</code> menampilkan form, sedangkan <code>proses_tambah.php</code> memeriksa request, membersihkan/memvalidasi nilai, menyimpan rekaman ke array session, menyiapkan pesan flash, lalu redirect ke daftar.</li><li><code>login.php</code> menampilkan form login pada prototipe. Handler form mengelola data/masukan sesuai tahap latihan; keberadaan halaman login saja belum berarti autentikasi produksi.</li><li><code>assets/js/anggota.js</code>, <code>buku.js</code>, dan <code>app.js</code> memberi perilaku browser untuk tabel/form yang dipakai. <code>style.css</code> mengatur tema dan layout.</li><li><code>data/*.json</code>, <code>docs/wireframe.md</code>, <code>laporan.md</code>, dan gambar berfungsi sebagai data contoh/dokumentasi.</li></ul>
+                <p><strong>Session</strong> menyimpan data sementara antar-request bagi sesi browser. Berbeda dengan database, data session bukan penyimpanan bersama yang terstruktur untuk jangka panjang.</p>
+            </section>
+            <section class="card" id="job8"><h2>Jobsheet 8 — inventaris dan transaksi berbasis database</h2>
+                <p>Aplikasi berganti domain menjadi pengelolaan barang dan pelanggan. <code>includes/koneksi.php</code> membaca konfigurasi PostgreSQL dari environment lalu membuat koneksi PDO; <code>sql/barang_pelanggan_transaksi.sql</code> membuat tabel barang, pelanggan, dan transaksi.</p>
+                <ul><li><code>index.php</code>: dashboard/ringkasan aplikasi.</li><li><code>barang/list.php</code> dan <code>pelanggan/list.php</code>: mengambil data dari database dan menampilkan tabel. File <code>tambah.php</code> menampilkan form; <code>proses_tambah.php</code> memvalidasi input dan menjalankan INSERT dengan prepared statement.</li><li><code>barang/proses_keluar.php</code>: membaca jumlah keluar, memeriksa stok, mengurangi stok, dan mencatat pemasukan transaksi dalam satu transaksi database.</li><li><code>pelanggan/proses_beli.php</code>: menghubungkan pembelian pelanggan dengan barang, stok, dan catatan pemasukan.</li><li><code>assets/</code> memuat tema CSS dan JavaScript interaksi tabel/form; <code>includes/header.php</code>/<code>footer.php</code> menyatukan layout.</li></ul>
+                <p>Blok <code>beginTransaction()</code>, <code>commit()</code>, dan <code>rollBack()</code> menjaga perubahan yang berkaitan agar berhasil atau dibatalkan bersama. Prepared statement memisahkan SQL dari nilai input.</p>
+            </section>
+            <section class="card" id="job9"><h2>Jobsheet 9 — edit dan CRUD lebih lengkap</h2>
+                <p>Struktur database barang/pelanggan diteruskan, lalu alur edit ditambahkan. <code>barang/edit.php</code> dan <code>pelanggan/edit.php</code> mengambil ID dari URL, membaca rekaman, lalu mengisi nilai awal formulir. <code>proses_edit.php</code> memvalidasi nilai dan menjalankan SQL <code>UPDATE ... WHERE id = :id</code> menggunakan PDO prepared statement.</p>
+                <p>Halaman <code>hapus.php</code> menghapus rekaman terkait; <code>list.php</code> menampilkan data dan tautan aksi; <code>tambah.php</code>/<code>proses_tambah.php</code> menambahkan rekaman. Berkas SQL menjelaskan skema dan JavaScript/CSS menangani tampilan serta interaksi umum. Artinya, pengelolaan data mencakup create, read, update, delete (CRUD), selain proses barang keluar dan pembelian.</p>
+            </section>
+            <section class="card" id="job10"><h2>Jobsheet 10 — autentikasi dan proteksi halaman</h2>
+                <p>Fitur CRUD database dilanjutkan dengan modul <code>auth/</code>: halaman login/registrasi menampilkan form, sedangkan <code>proses_login.php</code> dan <code>proses_register.php</code> memeriksa kredensial atau membuat akun. <code>logout.php</code> mengakhiri sesi. <code>includes/auth.php</code> memeriksa sesi pengguna dan mengarahkan pengguna yang belum login.</p>
+                <p><code>includes/koneksi.php</code> menyediakan PDO; header/footer/helpers yang tersedia dipakai lintas halaman. Halaman yang memerlukan akun menyertakan pemeriksaan autentikasi sebelum mengakses konten. Form login, tabel, edit, dan transaksi tetap berada di modul barang/pelanggan. JavaScript/CSS menangani tampilan responsif dan validasi browser, bukan pengganti validasi server.</p>
+            </section>
+            <section class="card" id="job11"><h2>Jobsheet 11 — token CSRF dan keamanan request</h2>
+                <p>Fitur Jobsheet 10 diteruskan dan ditambah <code>includes/csrf.php</code>. <code>csrf_token()</code> membuat token acak dan menyimpannya di session, <code>csrf_field()</code> memasukkan token ke form tersembunyi, dan <code>csrf_verify()</code> membandingkan token POST dengan <code>hash_equals()</code>. Handler yang memanggil verifikasi menolak request tanpa token yang cocok.</p>
+                <p><code>includes/auth.php</code> melindungi halaman untuk pengguna yang masuk; <code>includes/helpers.php</code> berisi fungsi bantu yang digunakan kembali, misalnya untuk output. Handler tambah/edit/hapus dan pembelian tetap mengerjakan perubahan database. SQL menjelaskan tabel; aset CSS/JS mendukung UI.</p>
+            </section>
+            <section class="card" id="job12"><h2>Jobsheet 12 — relasi transaksi, riwayat, dan penguncian stok</h2>
+                <p>Perubahan utama ada pada skema database dan alur transaksi.</p>
+                <ul><li><code>sql/barang_pelanggan_transaksi.sql</code>: tabel <code>transaksi</code> menyimpan <code>pelanggan_id</code> dan <code>barang_id</code> sebagai foreign key. Aturan <code>ON DELETE SET NULL</code> mempertahankan transaksi saat data master dihapus; identitas barang/pelanggan bisa kosong tetapi catatan nominal tetap ada.</li><li><code>pelanggan/proses_beli.php</code>: memvalidasi pilihan pelanggan, barang, dan jumlah; memulai transaksi database; membaca baris barang dengan <code>SELECT ... FOR UPDATE</code>; memeriksa stok; memperbarui stok; mencatat transaksi dengan ID relasi; kemudian commit. Jika proses gagal, rollback membatalkan perubahan terkait.</li><li><code>transaksi/riwayat.php</code>: meminta pengguna memilih pelanggan, lalu memakai <code>LEFT JOIN</code> untuk menampilkan transaksi bersama nama barang. Riwayat tetap dapat ditampilkan meski relasi barang sudah kosong.</li><li><code>index.php</code>: dashboard memakai relasi untuk menyajikan transaksi terbaru dengan informasi barang/pelanggan.</li><li>Folder autentikasi, CSRF, helper, koneksi, CSS, dan JavaScript dari tahap sebelumnya tetap mendukung keamanan, koneksi, layout, dan interaksi form/tabel.</li></ul>
+                <p><strong>Kenapa FOR UPDATE?</strong> Baris stok dikunci selama transaksi berjalan, sehingga dua pembelian bersamaan tidak sama-sama memakai stok lama. <strong>Kenapa transaksi database?</strong> Pengurangan stok dan pencatatan penjualan harus berhasil bersama; bila salah satunya gagal, rollback menjaga data tidak setengah berubah.</p>
+            </section>
+            <section class="card">
+                <h2>Ringkasan perkembangan</h2>
+                <ol><li>Jobsheet 1–4: struktur dan desain halaman SIMPUS.</li><li>Jobsheet 5–6: Bootstrap, interaksi browser, dan pemuatan JSON.</li><li>Jobsheet 7: PHP dan penyimpanan session untuk prototipe perpustakaan.</li><li>Jobsheet 8–9: aplikasi inventaris berbasis PostgreSQL, transaksi stok, lalu CRUD edit.</li><li>Jobsheet 10–11: login/session, pembatasan akses, dan verifikasi CSRF.</li><li>Jobsheet 12: foreign key transaksi, riwayat berbasis JOIN, transaksi atomik, dan penguncian stok.</li></ol>
+            </section>
+        </div>
+    </div>
+</main>
+<footer class="footer"><div class="wrap">Handbook DPW · Penjelasan berkas dan alur kode Jobsheet 1–12.</div></footer>
+</body>
+</html>

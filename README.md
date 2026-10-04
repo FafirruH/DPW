@@ -224,3 +224,9 @@ Untuk modul yang belum siap, kita tidak menggunakan tag `<a>` melainkan `<div>` 
 | **Micro-Interactions** | Transition & CSS Transform `translateY` | Memberikan kesan intuitif dan responsif saat antarmuka disentuh atau disorot kursor. |
 
 ---
+
+## Handbook Penjelasan Kode Jobsheet
+
+Untuk penjelasan lebih lengkap tentang cara kerja CSS, JavaScript, dan PHP pada Jobsheet 1–12, buka [Handbook Jobsheet](./handbook.html). Handbook tersebut membahas selector dan cascade CSS, event dan Fetch API JavaScript, serta request PHP, session, PDO, validasi, transaksi database, autentikasi, dan CSRF.
+
+---
