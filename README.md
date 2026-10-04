@@ -29,6 +29,7 @@ File `index.html` ini berfungsi sebagai **pintu masuk utama (Hub Navigasi)** unt
 ## 2. STRUKTUR DIREKTORI
 
 ```
+├── api                     <-- 
 ├── index.html              <-- File Landing Page Navigasi Utama
 ├── README.md               <-- Panduan & Dokumentasi
 ├── Jobsheet1/              <-- HTML5 Semantic Skeleton
@@ -38,9 +39,12 @@ File `index.html` ini berfungsi sebagai **pintu masuk utama (Hub Navigasi)** unt
 ├── Jobsheet5/              <-- JavaScript DOM & Event
 ├── Jobsheet6/              <-- Fetch API & JSON
 ├── Jobsheet7/              <-- PHP Dasar & Form Handling
-└── Jobsheet8/              <-- Koneksi PostgreSQL
-└── Jobsheet9/              <-- CRUD Penuh
-└── Jobsheet10/             <-- Autentikasi & Manajemen Sesi
+├── Jobsheet8/              <-- Koneksi PostgreSQL
+├── Jobsheet9/              <-- CRUD Penuh
+├── Jobsheet10/             <-- Autentikasi & Manajemen Sesi
+├── Jobsheet11/             <-- Keamanan Web Dasar
+├── Jobsheet12/             <-- Integrasi Modul Peminjaman
+└── vercel.json             <-- 
 ```
 
 

@@ -10,11 +10,11 @@ Pada pembaruan Jobsheet 12, sistem kasir Toko Madura merombak struktur pencatata
 
 ## 2. Struktur Modul Baru
 ```text
-Jobsheet11 (Termasuk Update Jobsheet 12)/
+Jobsheet12/
 ├── transaksi/
-│   └── riwayat.php              # Halaman baru untuk melihat histori pembelian pelanggan
+│   └── riwayat.php                     # Halaman baru untuk melihat histori pembelian pelanggan
 ├── sql/
-│   └── 03_transaksi_relasi.sql  # DDL pembongkaran dan pembuatan tabel relasi transaksi
+│   └── barang_pelanggan_transaksi.sql  # DDL pembongkaran dan pembuatan tabel relasi transaksi
 ```
 
 ### Penjelasan Konsep Inti Jobsheet 12: Relasi & Transaksi Lanjutan
