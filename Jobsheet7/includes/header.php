@@ -19,7 +19,7 @@ $base = app_base_url();
                 <span class="navbar-toggler-icon"></span>
             </button>
             <nav class="collapse navbar-collapse" id="navMenu">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base, ENT_QUOTES, 'UTF-8') ?>index.php">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base, ENT_QUOTES, 'UTF-8') ?>buku/list.php">Daftar Buku</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base, ENT_QUOTES, 'UTF-8') ?>anggota/list.php">Daftar Anggota</a></li>

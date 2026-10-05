@@ -48,15 +48,79 @@ function app_read_data(string $type): array
     if (!is_array($data)) {
         throw new RuntimeException('Format data JSON tidak valid.');
     }
-    return $data;
+
+    $sessionData = $_SESSION['library_data'][$type] ?? [];
+    $deletedIds = array_fill_keys($sessionData['deleted'] ?? [], true);
+    $updatedRecords = $sessionData['updated'] ?? [];
+    $records = [];
+
+    foreach ($data as $record) {
+        $id = (string) ($record['id'] ?? '');
+        if (isset($deletedIds[$id])) {
+            continue;
+        }
+        $records[] = $updatedRecords[$id] ?? $record;
+    }
+
+    return array_merge($records, $sessionData['added'] ?? []);
 }
 
 function app_write_data(string $type, array $data): void
 {
-    $contents = json_encode(array_values($data), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
-    if (file_put_contents(app_data_path($type), $contents . PHP_EOL, LOCK_EX) === false) {
-        throw new RuntimeException('Data tidak dapat disimpan. Periksa izin tulis folder data.');
+    $contents = file_get_contents(app_data_path($type));
+    if ($contents === false) {
+        throw new RuntimeException('Data awal tidak dapat dibaca.');
     }
+
+    try {
+        $seedRecords = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
+    } catch (JsonException $error) {
+        throw new RuntimeException('Format file JSON tidak valid.', 0, $error);
+    }
+
+    $seedById = [];
+    foreach ($seedRecords as $record) {
+        if (isset($record['id'])) {
+            $seedById[(string) $record['id']] = $record;
+        }
+    }
+
+    $currentById = [];
+    foreach ($data as $record) {
+        if (isset($record['id'])) {
+            $currentById[(string) $record['id']] = $record;
+        }
+    }
+
+    $added = [];
+    $updated = [];
+    $deleted = [];
+    foreach ($currentById as $id => $record) {
+        if (!isset($seedById[$id])) {
+            $added[] = $record;
+            continue;
+        }
+
+        $original = $seedById[$id];
+        $current = $record;
+        ksort($original);
+        ksort($current);
+        if ($current !== $original) {
+            $updated[$id] = $record;
+        }
+    }
+
+    foreach ($seedById as $id => $_record) {
+        if (!isset($currentById[$id])) {
+            $deleted[] = $id;
+        }
+    }
+
+    $_SESSION['library_data'][$type] = [
+        'added' => $added,
+        'updated' => $updated,
+        'deleted' => $deleted,
+    ];
 }
 
 function app_validate_record(string $type, array $input, ?string $currentId = null): array
