@@ -1,10 +1,15 @@
-<?php include '../header.php'; ?>
+<?php
+require_once __DIR__ . '/../includes/functions.php';
+$pageTitle = 'Tambah Anggota - SIMPUS-Mini';
+$base = app_base_url();
+include __DIR__ . '/../includes/header.php';
+?>
 
     <main class="container my-4">
         <section class="card shadow-sm mb-4">
             <div class="card-body">
                 <h2 class="card-title mb-4 fw-bold" style="color:#1d5b8a;">Tambah Anggota</h2>
-                <form id="form-tambah" action="list.php" method="POST">
+                <form id="form-tambah" action="proses_tambah.php" method="POST">
                     <div class="mb-3">
                         <label for="nama" class="form-label fw-semibold">Nama</label>
                         <input type="text" class="form-control" id="nama" name="nama" required>
@@ -30,4 +35,4 @@
         </section>
     </main>
 
-<?php include '../footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

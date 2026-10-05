@@ -1,52 +1,31 @@
 <?php
-session_start();
+require_once __DIR__ . '/../includes/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /DPW/buku/list.php');
+    header('Location: ../list.php');
     exit;
 }
 
-$judul = htmlspecialchars(trim($_POST['judul'] ?? ''), ENT_QUOTES, 'UTF-8');
-$pengarang = htmlspecialchars(trim($_POST['pengarang'] ?? ''), ENT_QUOTES, 'UTF-8');
-$tahun = filter_var($_POST['tahun'] ?? '', FILTER_VALIDATE_INT);
-$isbn = htmlspecialchars(trim($_POST['isbn'] ?? ''), ENT_QUOTES, 'UTF-8');
-$stok = filter_var($_POST['stok'] ?? '', FILTER_VALIDATE_INT);
-$kategori = htmlspecialchars(trim($_POST['kategori'] ?? ''), ENT_QUOTES, 'UTF-8');
-
-$errors = [];
-
-if ($judul === '') $errors[] = "Judul buku wajib diisi.";
-if ($pengarang === '') $errors[] = "Pengarang wajib diisi.";
-
-if ($tahun === false || $tahun < 1900 || $tahun > 2026) {
-    $errors[] = "Tahun terbit harus di antara 1900 dan 2026.";
-}
-
-if ($stok === false || $stok < 0) {
-    $errors[] = "Stok tidak boleh negatif.";
-}
-
-if ($isbn !== '' && !preg_match('/^[0-9-]+$/', $isbn)) {
-    $errors[] = "ISBN hanya boleh berisi angka dan tanda hubung (-).";
-}
-
-if (!empty($errors)) {
-    $_SESSION['flash'] = ['type' => 'danger', 'pesan' => implode('<br>', $errors)];
-    header('Location: /DPW/buku/tambah.php');
+try {
+    $record = app_validate_record('buku', $_POST);
+    $record['id'] = 'B' . bin2hex(random_bytes(5));
+    $records = app_read_data('buku');
+    $records[] = $record;
+    app_write_data('buku', $records);
+    $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil ditambahkan.'];
+} catch (InvalidArgumentException $error) {
+    $_SESSION['flash'] = ['type' => 'danger', 'pesan' => $error->getMessage()];
+    header('Location: tambah.php');
+    exit;
+} catch (JsonException $error) {
+    $_SESSION['flash'] = ['type' => 'danger', 'pesan' => 'Data buku tidak dapat diproses.'];
+    header('Location: tambah.php');
+    exit;
+} catch (RuntimeException $error) {
+    $_SESSION['flash'] = ['type' => 'danger', 'pesan' => $error->getMessage()];
+    header('Location: tambah.php');
     exit;
 }
 
-if (!isset($_SESSION['buku'])) $_SESSION['buku'] = [];
-
-$_SESSION['buku'][] = [
-    'judul' => $judul,
-    'pengarang' => $pengarang,
-    'tahun' => $tahun,
-    'isbn' => $isbn,
-    'stok' => $stok,
-    'kategori' => $kategori
-];
-
-$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil ditambahkan.'];
-header('Location: /DPW/buku/list.php');
+header('Location: list.php');
 exit;

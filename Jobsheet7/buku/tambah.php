@@ -1,10 +1,15 @@
-<?php include '../header.php'; ?>
+<?php
+require_once __DIR__ . '/../includes/functions.php';
+$pageTitle = 'Tambah Buku - SIMPUS-Mini';
+$base = app_base_url();
+include __DIR__ . '/../includes/header.php';
+?>
 
     <main class="container my-4">
         <section class="card shadow-sm mb-4">
             <div class="card-body">
                 <h2 class="card-title mb-4 fw-bold" style="color:#1d5b8a;">Tambah Buku</h2>
-                <form id="form-tambah" action="list.php" method="POST">
+                <form id="form-tambah" action="proses_tambah.php" method="POST">
                     <div class="mb-3">
                         <label for="judul" class="form-label fw-semibold">Judul Buku</label>
                         <input type="text" class="form-control" id="judul" name="judul" required>
@@ -15,7 +20,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="tahun" class="form-label fw-semibold">Tahun Terbit</label>
-                        <input type="number" class="form-control" id="tahun" name="tahun" min="1900" max="2026" required>
+                        <input type="number" class="form-control" id="tahun" name="tahun" min="1900" max="<?= date('Y') ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="isbn" class="form-label fw-semibold">ISBN</label>
@@ -42,4 +47,4 @@
         </section>
     </main>
 
-<?php include '../footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>
