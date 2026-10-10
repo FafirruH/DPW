@@ -3,12 +3,14 @@
 ## 📌 DAFTAR ISI
 1. [Gambaran Umum](#1-gambaran-umum)
 2. [Struktur Direktori](#2-struktur-direktori)
-3. [Panduan Penggunaan](#3-panduan-penggunaan)
-4. [Penjelasan Detail Cara Kerja Kode](#4-penjelasan-detail-cara-kerja-kode)
+3. [Wireframe Setiap Jobsheet](#3-wireframe-setiap-jobsheet)
+4. [Panduan Penggunaan](#4-panduan-penggunaan)
+5. [Cara Kerja `api/` dan `vercel.json`](#5-cara-kerja-api-dan-verceljson)
+6. [Penjelasan Detail Cara Kerja Kode](#6-penjelasan-detail-cara-kerja-kode)
    - [A. Konfigurasi Variabel CSS & Tema](#a-konfigurasi-variabel-css--tema)
    - [B. Kartu Modul Aktif (Jobsheet 1 – 8)](#b-kartu-modul-aktif-jobsheet-1--8)
    - [C. Kartu Modul Terkunci/Disabled (Jobsheet 9 – 13)](#c-kartu-modul-terkuncidisabled-jobsheet-9--13)
-5. [Konsep Pemrograman & UI/UX yang Dipelajari](#5-konsep-pemrograman--uiux-yang-dipelajari)
+7. [Konsep Pemrograman & UI/UX yang Dipelajari](#7-konsep-pemrograman--uiux-yang-dipelajari)
 
 ---
 
@@ -19,34 +21,47 @@ File `index.html` ini berfungsi sebagai **pintu masuk utama (Hub Navigasi)** unt
 ### **Fitur Utama:**
 * **Responsive Grid System**: Menggunakan Bootstrap 5 untuk memastikan tampilan optimal di layar *mobile*, tablet, maupun desktop.
 * **Warm Theme Aesthetic**: Mengusung skema warna *Warm Chocolate & Cream* yang konsisten dengan identitas aplikasi SIMPUS Toko Kelontong.
-* **Direct Folder Routing**: Tautan langsung ke sub-folder bersih tanpa spasi (`./Jobsheet1/` hingga `./Jobsheet10/`).
-* **Visual Locking Effect**: Efek visual *blur*, *overlay*, dan pointer `not-allowed` untuk menandai modul yang belum dirilis/diakses (Jobsheet 11 – 13).
+* **Direct Folder Routing**: Tautan ke folder Jobsheet menggunakan path relatif.
+* **Visual Locking Effect**: Kartu Jobsheet dapat diberi penanda visual sesuai status yang didefinisikan pada halaman utama.
+* **Dokumentasi wireframe**: Setiap Jobsheet memiliki sketsa halaman/alur tersendiri di `docs/wireframe.md`.
 
 ---
 
 ## 2. STRUKTUR DIREKTORI
 
 ```
-├── api                     <-- Folder khusus (reserved directory) yang digunakan untuk meletakkan kode backend / API endpoint.
+├── api/
+│   └── index.php            <-- Front controller PHP untuk routing deployment Vercel
 ├── index.html              <-- File Landing Page Navigasi Utama
 ├── README.md               <-- Panduan & Dokumentasi
-├── Jobsheet1/              <-- HTML5 Semantic Skeleton
-├── Jobsheet2/              <-- CSS3 Styling Dasar
-├── Jobsheet3/              <-- Responsive Design dengan Framework
-├── Jobsheet4/              <-- UI/UX Design
-├── Jobsheet5/              <-- JavaScript DOM & Event
-├── Jobsheet6/              <-- Fetch API & JSON
-├── Jobsheet7/              <-- PHP Dasar & Form Handling
-├── Jobsheet8/              <-- Koneksi PostgreSQL
-├── Jobsheet9/              <-- CRUD Penuh
-├── Jobsheet10/             <-- Autentikasi & Manajemen Sesi
-├── Jobsheet11/             <-- Keamanan Web Dasar
-├── Jobsheet12/             <-- Integrasi Modul Peminjaman
-└── vercel.json             <-- File konfigurasi dalam format JSON yang mengontrol perilaku deployment proyek Anda di platform Vercel.
+├── handbook.html           <-- Handbook penjelasan kode Jobsheet 1–12
+├── Jobsheet1/ ... Jobsheet12/
+│   └── docs/wireframe.md    <-- Wireframe khusus untuk Jobsheet tersebut
+└── vercel.json             <-- Runtime PHP dan aturan routing deployment Vercel
 ```
 
+Folder `Jobsheet1`–`Jobsheet7` berisi tahapan SIMPUS (perpustakaan mini); `Jobsheet8`–`Jobsheet12` berisi perkembangan aplikasi inventaris dan penjualan Toko Madura. Setiap folder Jobsheet juga memiliki README masing-masing dengan uraian modulnya.
 
-## 3. PANDUAN PENGGUNAAN
+## 3. WIREFRAME SETIAP JOBSHEET
+
+Wireframe berikut adalah sketsa teks untuk memahami susunan halaman dan alur utamanya sebelum membaca HTML/PHP. Buka berkas tiap Jobsheet untuk melihat rancangan lebih lengkap:
+
+| Jobsheet | Wireframe |
+| --- | --- |
+| 1 — Struktur HTML SIMPUS | [Jobsheet1/docs/wireframe.md](Jobsheet1/docs/wireframe.md) |
+| 2 — CSS terpisah | [Jobsheet2/docs/wireframe.md](Jobsheet2/docs/wireframe.md) |
+| 3 — Bootstrap dan CSS kustom | [Jobsheet3/docs/wireframe.md](Jobsheet3/docs/wireframe.md) |
+| 4 — Konsistensi halaman SIMPUS | [Jobsheet4/docs/wireframe.md](Jobsheet4/docs/wireframe.md) |
+| 5 — Bootstrap dan JavaScript | [Jobsheet5/docs/wireframe.md](Jobsheet5/docs/wireframe.md) |
+| 6 — Data JSON dan `fetch()` | [Jobsheet6/docs/wireframe.md](Jobsheet6/docs/wireframe.md) |
+| 7 — PHP dan session | [Jobsheet7/docs/wireframe.md](Jobsheet7/docs/wireframe.md) |
+| 8 — Inventaris dan penjualan | [Jobsheet8/docs/wireframe.md](Jobsheet8/docs/wireframe.md) |
+| 9 — CRUD barang dan pelanggan | [Jobsheet9/docs/wireframe.md](Jobsheet9/docs/wireframe.md) |
+| 10 — Autentikasi | [Jobsheet10/docs/wireframe.md](Jobsheet10/docs/wireframe.md) |
+| 11 — Output aman dan CSRF | [Jobsheet11/docs/wireframe.md](Jobsheet11/docs/wireframe.md) |
+| 12 — Transaksi relasional | [Jobsheet12/docs/wireframe.md](Jobsheet12/docs/wireframe.md) |
+
+## 4. PANDUAN PENGGUNAAN
 
 ### **A. Pengujian Lokal (Local Development)**
 
@@ -56,31 +71,45 @@ File `index.html` ini berfungsi sebagai **pintu masuk utama (Hub Navigasi)** unt
 
 ### **B. Penerbitan ke Vercel (Production)**
 
-1. Simpan file `index.html` di tingkat teratas (*root folder*) repositori Git.
-2. *Push* perubahan ke GitHub.
-3. Vercel akan otomatis mendeteksi `index.html` sebagai titik mula halaman web (*entry point*) untuk domain `dpw.fafirru.my.id`.
+1. Hubungkan repositori ke proyek Vercel dan pastikan root proyek yang dipilih berisi `vercel.json`, `api/`, halaman utama, dan folder Jobsheet.
+2. Atur environment variable yang dibutuhkan aplikasi PHP/database pada pengaturan proyek Vercel. Nilai lokal pada berkas koneksi PHP bukan pengganti konfigurasi deployment yang aman.
+3. Deploy repositori, kemudian uji URL beranda dan URL halaman Jobsheet. Konfigurasi saat ini meneruskan sebagian besar request ke front controller `api/index.php`; lihat penjelasan rute berikut.
 
----
+## 5. CARA KERJA `api/` DAN `vercel.json`
 
-## 4. PENJELASAN DETAIL CARA KERJA KODE
+### `api/index.php`: front controller, bukan kumpulan endpoint API
 
-### Fungsi Folder api/
-Pada arsitektur modern seperti Vercel, folder api/ adalah folder khusus (reserved directory) yang digunakan untuk meletakkan kode backend / API endpoint.
+Folder `api/` root saat ini hanya berisi `index.php`. File ini bertindak sebagai **front controller/router** untuk konfigurasi Vercel. Ia membaca path request, mencari file atau folder yang diminta di root repositori, dan:
 
-Serverless Functions: Setiap file di dalam folder api/ (seperti api/index.php atau api/users.js) akan diubah oleh Vercel menjadi Serverless Function. Artinya, server backend tidak berjalan terus-menerus 24/7, melainkan hanya menyala dan mengeksekusi kode saat ada permintaan (request) dari pengguna.
+- jika path menunjuk folder, mencoba `index.html`, lalu `index.php`;
+- menyajikan file `.html`, `.css`, dan `.js` dengan content type yang sesuai;
+- mengeksekusi file `.php` menggunakan `require`;
+- mengirim status HTTP 404 jika target tidak ditemukan atau ekstensinya tidak ditangani.
 
-Penanganan PHP di Cloud: Karena Vercel secara default ditujukan untuk aplikasi statis/Node.js, folder api/ ini dipadukan dengan runtime khusus (misalnya vercel-php) agar script PHP dapat berjalan dan memproses logika server (seperti koneksi ke database PostgreSQL Neon, otentikasi, atau query data).
+Jadi, `api/index.php` bukan API bisnis khusus seperti `/api/users` yang mengembalikan JSON. Ia menerima berbagai URL situs dan meneruskannya ke file proyek yang cocok, termasuk halaman Jobsheet. Routing ini membuat satu fungsi PHP menangani jalur halaman yang berbeda.
 
-Keamanan: Memisahkan skrip eksekusi backend di folder api/ mencegah source code backend terekspos secara mentah ke browser.
+### `vercel.json`: runtime dan urutan routing
 
-### Fungsi File vercel.json
-File vercel.json adalah file konfigurasi dalam format JSON yang mengontrol perilaku deployment proyek Anda di platform Vercel.
+```json
+{
+  "functions": {
+    "api/index.php": { "runtime": "vercel-php@0.9.0" }
+  },
+  "routes": [
+    { "src": "/(assets/.*)", "dest": "/$1" },
+    { "src": "/(.*)", "dest": "/api/index.php" }
+  ]
+}
+```
 
-Penanganan Runtime (Builders): Memberitahu Vercel mesin atau community runtime mana yang harus digunakan untuk memproses file tertentu. Contohnya, mengarahkan file .php agar dieksekusi menggunakan runtime PHP (vercel-php).
+- **`functions`** menetapkan runtime PHP `vercel-php@0.9.0` untuk fungsi `api/index.php`, sehingga Vercel dapat menjalankan router tersebut sebagai fungsi backend.
+- **Rute pertama** mencocokkan URL yang dimulai dengan `/assets/` dan mengarahkannya ke file asset pada path tersebut agar file aset root dapat dilayani langsung.
+- **Rute kedua** adalah fallback: semua URL lain diteruskan ke `/api/index.php`. Router kemudian memilih berkas HTML/PHP/CSS/JS dari path request.
+- `dest` pada aturan `routes` adalah tujuan pemrosesan di sisi deployment; aturan tersebut bukan tautan HTML ke README maupun contoh route khusus seperti `/Jobsheet8` ke `api/Jobsheet8.php`. URL browser pada umumnya tetap memakai URL yang diminta karena ini routing internal.
 
-Routing & URL Rewriting: Mengatur aturan pengalihan URL (URL rewrite/redirect). Misalnya, jika pengguna mengakses [http://domain.com/Jobsheet8/](http://domain.com/Jobsheet8/), vercel.json dapat mengarahkan request tersebut secara internal ke api/Jobsheet8.php tanpa mengubah URL di browser pengguna.
+Konfigurasi ini **tidak** mendefinisikan CORS, header keamanan, atau environment variable; hal tersebut perlu disetel secara terpisah jika dibutuhkan. Keberhasilan deployment PHP juga bergantung pada dukungan runtime Vercel dan konfigurasi environment variable/database. Untuk pengembangan lokal, Laragon/XAMPP biasanya melayani file secara langsung dan tidak menggunakan front controller Vercel ini.
 
-Environment Variables & Headers: Mengatur variabel lingkungan, aturan CORS (Cross-Origin Resource Sharing), serta header keamanan HTTP secara global untuk seluruh proyek.
+## 6. PENJELASAN DETAIL CARA KERJA KODE
 
 ### **A. Konfigurasi Variabel CSS & Tema**
 
@@ -213,7 +242,7 @@ Untuk modul yang belum siap, kita tidak menggunakan tag `<a>` melainkan `<div>` 
 
 ---
 
-## 5. KONSEP PEMROGRAMAN & UI/UX YANG DIPELAJARI
+## 7. KONSEP PEMROGRAMAN & UI/UX YANG DIPELAJARI
 
 | Konsep | Penerapan pada Kode | Manfaat UI/UX |
 | --- | --- | --- |
