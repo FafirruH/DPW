@@ -19,10 +19,6 @@ $daftarBarang    = $pdo->query("SELECT * FROM barang WHERE stok > 0 ORDER BY nam
                     Daftar Pelanggan
                 </h2>
                 <div class="d-flex gap-2">
-                    <button type="button" id="btn-reload" class="btn btn-outline-secondary btn-sm"
-                        onclick="location.reload();">
-                        Muat Ulang
-                    </button>
                     <a href="/Jobsheet10/pelanggan/tambah.php" class="btn btn-theme btn-sm">
                         + Tambah Pelanggan
                     </a>
@@ -162,7 +158,5 @@ $daftarBarang    = $pdo->query("SELECT * FROM barang WHERE stok > 0 ORDER BY nam
         </div>
     </section>
 </main>
-
-<script src="/assets/js/pelanggan.js"></script>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>

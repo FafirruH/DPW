@@ -52,8 +52,7 @@ $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
                     <span class="text-light fw-medium small">Halo, <?= htmlspecialchars($_SESSION['nama']) ?></span>
                     <a href="<?= $base ?>auth/logout.php" class="btn btn-outline-light btn-sm px-3">Logout</a>
                     <?php else: ?>
-                    <a href="<?= $base ?>auth/login.php" class="btn btn-theme btn-sm px-4"
-                        style="background-color: var(--accent-terracotta);">Login</a>
+                    <a href="<?= $base ?>auth/login.php" class="btn btn-outline-light btn-sm nav-auth-button">Login</a>
                     <?php endif; ?>
                 </div>
             </nav>

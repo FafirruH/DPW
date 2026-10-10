@@ -40,12 +40,3 @@ async function muatDaftarBuku() {
 }
 
 document.addEventListener("DOMContentLoaded", muatDaftarBuku);
-
-document.addEventListener("DOMContentLoaded", function () {
-    muatDaftarBuku();
-
-    const reloadBtn = document.getElementById("btn-reload");
-    if (reloadBtn) {
-        reloadBtn.addEventListener("click", muatDaftarBuku);
-    }
-});

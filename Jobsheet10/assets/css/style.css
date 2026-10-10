@@ -60,6 +60,24 @@ main.container {
     background-color: rgba(248, 244, 233, 0.12);
 }
 
+.nav-auth-button {
+    min-width: 84px;
+    padding-inline: 1rem;
+}
+
+.navbar .btn-outline-light {
+    background-color: transparent;
+    border-color: rgba(248, 244, 233, 0.75);
+    color: #f8f4e9;
+}
+
+.navbar .btn-outline-light:hover,
+.navbar .btn-outline-light:focus-visible {
+    border-color: #f8f4e9;
+    background-color: #f8f4e9;
+    color: var(--dark-chocolate);
+}
+
 /* Card Styling */
 .card {
     border: 1px solid var(--border-color);

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header class="navbar navbar-expand-lg navbar-dark" style="background-color:#1d5b8a;">
+    <header class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand fw-semibold" href="../index.html">SIMPUS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,12 +16,8 @@
             </button>
             <nav class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="list.html">Daftar Buku</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="tambah.html">Tambah Buku</a></li>
                     <li class="nav-item"><a class="nav-link" href="../anggota/list.html">Daftar Anggota</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../anggota/tambah.html">Tambah Anggota</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../login.html">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -30,7 +26,7 @@
     <main class="container my-4">
         <section class="card shadow-sm mb-4">
             <div class="card-body">
-                <h2 class="card-title mb-4 fw-bold" style="color:#1d5b8a;">Tambah Buku</h2>
+                <h2 class="card-title mb-4 fw-bold">Tambah Buku</h2>
                 <form id="form-tambah" action="list.html" method="POST">
                     <div class="mb-3">
                         <label for="judul" class="form-label fw-semibold">Judul Buku</label>
@@ -61,7 +57,7 @@
                         </select>
                     </div>
                     <div class="pt-2">
-                        <button type="submit" class="btn text-white" style="background-color:#1d5b8a;">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                         <a href="list.html" class="btn btn-secondary ms-1">Batal</a>
                     </div>
                 </form>

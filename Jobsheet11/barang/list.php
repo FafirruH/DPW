@@ -13,8 +13,6 @@ $daftarBarang = $pdo->query("SELECT * FROM barang ORDER BY id DESC")->fetchAll()
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
                 <h2 class="card-title h3 mb-0 fw-bold" style="color: #2c1d11">Daftar Barang</h2>
                 <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.reload();">Muat
-                        Ulang</button>
                     <a href="/Jobsheet11/barang/tambah.php" class="btn btn-theme btn-sm">+ Tambah Barang</a>
                 </div>
             </div>
@@ -79,5 +77,4 @@ $daftarBarang = $pdo->query("SELECT * FROM barang ORDER BY id DESC")->fetchAll()
         </div>
     </section>
 </main>
-<script src="/assets/js/barang.js"></script>
 <?php include __DIR__ . '/../includes/footer.php'; ?>
