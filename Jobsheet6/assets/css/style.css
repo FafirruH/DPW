@@ -481,3 +481,10 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+.error {
+    display: block;
+    margin-top: 0.35rem;
+    color: #a74f43;
+    font-size: 0.9rem;
+}

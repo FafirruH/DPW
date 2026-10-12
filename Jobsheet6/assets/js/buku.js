@@ -18,22 +18,28 @@ async function muatDaftarBuku() {
         const daftarBuku = await res.json();
 
         daftarBuku.forEach(function (buku) {
+            const badgeStok = Number(buku.stok) > 0
+                ? "bg-success-subtle text-success border border-success-subtle"
+                : "bg-danger-subtle text-danger border border-danger-subtle";
+
             const tr = document.createElement("tr");
             tr.innerHTML =
-                "<td>" + buku.judul + "</td>" +
+                "<td class=\"fw-medium\">" + buku.judul + "</td>" +
                 "<td>" + buku.pengarang + "</td>" +
                 "<td>" + buku.kategori + "</td>" +
-                "<td>" + buku.tahun + "</td>" +
-                "<td>" + buku.stok + "</td>" +
-                "<td>" +
-                "<button type=\"button\">Edit</button> " +
-                "<button type=\"button\" class=\"btn-hapus\">Hapus</button>" +
+                "<td class=\"text-center\">" + buku.tahun + "</td>" +
+                "<td class=\"text-center\"><span class=\"badge " + badgeStok + "\">" + buku.stok + "</span></td>" +
+                "<td class=\"text-center\">" +
+                "<div class=\"btn-group btn-group-sm\" role=\"group\">" +
+                "<button type=\"button\" class=\"btn btn-warning text-white\">Edit</button>" +
+                "<button type=\"button\" class=\"btn btn-danger btn-hapus\">Hapus</button>" +
+                "</div>" +
                 "</td>";
             tbody.appendChild(tr);
         });
     } catch (err) {
         tbody.innerHTML =
-            "<tr><td colspan=\"5\">Gagal memuat data: " + err.message + "</td></tr>";
+            "<tr><td colspan=\"6\">Gagal memuat data: " + err.message + "</td></tr>";
     } finally {
         loading.style.display = "none";
     }

@@ -294,25 +294,11 @@ footer {
     }
 }
 
-.bg-theme {
-    background: linear-gradient(120deg, var(--color-coffee-dark), var(--color-coffee)) !important;
-}
-
-.text-theme {
-    color: var(--color-coffee) !important;
-}
-
-.btn-theme {
-    border-color: var(--color-coffee);
-    color: var(--color-paper);
-    background-color: var(--color-coffee);
-}
-
-.btn-theme:hover,
-.btn-theme:focus {
-    border-color: var(--color-coffee-dark);
-    color: var(--color-paper);
-    background-color: var(--color-coffee-dark);
+.error {
+    display: block;
+    margin-top: 0.35rem;
+    color: #a74f43;
+    font-size: 0.9rem;
 }
 
 /* Warm theme overrides for the Bootstrap-based Jobsheet 3 pages. */
@@ -332,8 +318,7 @@ header.navbar .navbar-nav .nav-link {
     border-radius: 0.55rem;
 }
 
-header.navbar .navbar-nav .nav-link:hover,
-header.navbar .navbar-nav .nav-link.active {
+header.navbar .navbar-nav .nav-link:hover {
     background-color: rgba(255, 253, 249, 0.16);
 }
 

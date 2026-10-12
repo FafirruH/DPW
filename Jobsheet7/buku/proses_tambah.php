@@ -8,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $_SESSION['buku'] ??= [];
 $action = (string) ($_POST['aksi'] ?? '');
-$id = trim((string) ($_POST['id'] ?? ''));
 
 if ($action === 'hapus') {
+    $id = trim((string) ($_POST['id'] ?? ''));
     $existingCount = count($_SESSION['buku']);
     $_SESSION['buku'] = array_values(array_filter(
         $_SESSION['buku'],
@@ -56,12 +56,12 @@ if (!in_array($kategori, ['fiksi', 'non-fiksi', 'referensi'], true)) {
 
 if ($errors !== []) {
     $_SESSION['flash'] = ['type' => 'danger', 'pesan' => implode(' ', $errors)];
-    header('Location: tambah.php' . ($id === '' ? '' : '?edit=' . rawurlencode($id)));
+    header('Location: tambah.php');
     exit;
 }
 
-$record = [
-    'id' => $id !== '' ? $id : 'B' . bin2hex(random_bytes(5)),
+$_SESSION['buku'][] = [
+    'id' => 'B' . bin2hex(random_bytes(5)),
     'judul' => $judul,
     'pengarang' => $pengarang,
     'tahun' => $tahun,
@@ -69,25 +69,7 @@ $record = [
     'stok' => $stok,
     'kategori' => $kategori,
 ];
-$recordIndex = null;
-if ($id !== '') {
-    foreach ($_SESSION['buku'] as $index => $book) {
-        if ((string) ($book['id'] ?? '') === $id) {
-            $recordIndex = $index;
-            break;
-        }
-    }
-    if ($recordIndex === null) {
-        $_SESSION['flash'] = ['type' => 'danger', 'pesan' => 'Data buku tidak ditemukan.'];
-        header('Location: list.php');
-        exit;
-    }
-    $_SESSION['buku'][$recordIndex] = $record;
-    $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil diperbarui.'];
-} else {
-    $_SESSION['buku'][] = $record;
-    $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil ditambahkan.'];
-}
+$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil ditambahkan.'];
 
 header('Location: list.php');
 exit;

@@ -19,13 +19,15 @@ async function muatDaftarAnggota() {
         daftarAnggota.forEach(function (anggota) {
             const tr = document.createElement("tr");
             tr.innerHTML =
-                "<td>" + anggota.no_anggota + "</td>" +
-                "<td>" + anggota.nama + "</td>" +
+                "<td><span class=\"badge bg-secondary-subtle text-dark\">" + anggota.no_anggota + "</span></td>" +
+                "<td class=\"fw-medium\">" + anggota.nama + "</td>" +
                 "<td>" + anggota.alamat + "</td>" +
                 "<td>" + anggota.no_hp + "</td>" +
-                "<td>" +
-                "<button type=\"button\">Edit</button> " +
-                "<button type=\"button\" class=\"btn-hapus\">Hapus</button>" +
+                "<td class=\"text-center\">" +
+                "<div class=\"btn-group btn-group-sm\" role=\"group\">" +
+                "<button type=\"button\" class=\"btn btn-warning text-white\">Edit</button>" +
+                "<button type=\"button\" class=\"btn btn-danger btn-hapus\">Hapus</button>" +
+                "</div>" +
                 "</td>";
             tbody.appendChild(tr);
         });
