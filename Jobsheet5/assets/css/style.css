@@ -318,8 +318,7 @@ header.navbar .navbar-nav .nav-link {
     border-radius: 0.55rem;
 }
 
-header.navbar .navbar-nav .nav-link:hover,
-header.navbar .navbar-nav .nav-link.active {
+header.navbar .navbar-nav .nav-link:hover {
     background-color: rgba(255, 253, 249, 0.16);
 }
 
